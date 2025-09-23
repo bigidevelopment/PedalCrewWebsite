@@ -5,6 +5,14 @@
   <title>PedalCrew – Group Rides, Simplified</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="description" content="Make cycling more social, transparent, and community-driven. Join and organize group rides.">
+  <meta name="theme-color" content="#16a34a">
+  <meta property="og:title" content="PedalCrew – Group Rides, Simplified">
+  <meta property="og:description" content="Make cycling more social, transparent, and community‑driven. Join and organize group rides.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="favicon.svg">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="PedalCrew – Group Rides, Simplified">
+  <meta name="twitter:description" content="Make cycling more social, transparent, and community‑driven. Join and organize group rides.">
   <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
   <style>
     :root { color-scheme: light dark; --green:#22c55e; --green-d:#16a34a; --blue:#60a5fa; --ink:#0b172a; --bg:#ffffff; --muted:#64748b; }
@@ -40,6 +48,8 @@
     iframe.form { width: 100%; height: 720px; border: 0; }
     .footer-links { text-align: center; margin-top: 24px; }
     footer { text-align: center; padding: 28px; color: var(--muted); font-size: 14px; }
+    .note { color: var(--muted); font-size: 14px; }
+    .small { font-size: 14px; color: var(--muted); }
     @media (prefers-color-scheme: dark) {
       :root { --bg:#0b172a; --ink:#e5e7eb; }
       header { background:
@@ -61,7 +71,8 @@
     <div class="tag">Make cycling more social, transparent, and community‑driven</div>
     <p class="hero">Join rides near you, create your own, and grow with the crew.</p>
     <div class="cta">
-      <a class="btn primary" href="DOWNLOAD_APK_URL" download>⬇️ Download Android (demo)</a>
+      <!-- Replace GITHUB_RELEASE_APK_URL with your GitHub Releases APK link, e.g., https://github.com/OWNER/REPO/releases/latest/download/app-release.apk -->
+      <a class="btn primary" href="GITHUB_RELEASE_APK_URL" download>⬇️ Download Android (demo)</a>
       <a class="btn secondary" href="#feedback">💬 Share Feedback</a>
     </div>
     <div class="bubble b1"></div>
@@ -89,6 +100,38 @@
                 <li>Open the APK to install.</li>
               </ol>
               <p class="note">If blocked: Settings → Security → Install unknown apps → Allow for your browser.</p>
+              <p class="small">Download is hosted on GitHub Releases. By downloading you also agree to GitHub’s terms.</p>
+              <p class="small">iOS: TestFlight will come later. This demo focuses on Android.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="about-demo" style="margin-top:24px">
+          <div class="panel">
+            <div class="panel-head">What’s in this demo</div>
+            <div style="padding:16px">
+              <ul>
+                <li>Sign in with Google</li>
+                <li>Browse upcoming rides and filter by basics</li>
+                <li>Create a ride with presets; join/leave from details</li>
+                <li>Simple ranking points (create/join/complete)</li>
+                <li>In‑app activity feed and basic profile</li>
+              </ul>
+              <p class="note">Not yet: push notifications, maps/GPX previews, friends/following, iOS build.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="requirements" style="margin-top:24px">
+          <div class="panel">
+            <div class="panel-head">Requirements & known limitations</div>
+            <div style="padding:16px">
+              <ul>
+                <li>Android phone/tablet with a modern OS (recent versions work best)</li>
+                <li>Google account on device for sign‑in</li>
+                <li>Internet connection to load rides and sync actions</li>
+              </ul>
+              <p class="note">If install fails or sign‑in doesn’t work, please tell us your device model and Android version in the feedback.</p>
             </div>
           </div>
         </section>
@@ -106,7 +149,22 @@
           </div>
         </section>
 
-        <p class="footer-links"><a href="privacy.html">Privacy Policy</a> · <a href="mailto:developmentbigi@gmail.com">Contact</a></p>
+        <section id="troubleshooting" style="margin-top:24px">
+          <div class="panel">
+            <div class="panel-head">Troubleshooting</div>
+            <div style="padding:16px">
+              <ul>
+                <li>“App not installed”: uninstall older demo versions first and try again</li>
+                <li>Blocked by Play Protect: tap “Install anyway” or open APK from Files app</li>
+                <li>Google sign‑in loop: ensure a Google account is added on device</li>
+                <li>Slow load or empty feed: check network, then pull‑to‑refresh</li>
+              </ul>
+              <p class="note">Still stuck? Email us with screenshots if possible.</p>
+            </div>
+          </div>
+        </section>
+
+        <p class="footer-links"><a href="privacy.html">Privacy Policy</a> · <a href="mailto:developmentbigi@gmail.com">Contact</a> · <a href="GITHUB_RELEASES_PAGE" target="_blank" rel="noopener">GitHub Releases</a></p>
       </main>
     </div>
   </div>
