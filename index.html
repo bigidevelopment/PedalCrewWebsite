@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>PedalCrew – Group Rides, Simplified</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Make cycling more social, transparent, and community-driven. Join and organize group rides.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <style>
+    :root { color-scheme: light dark; }
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 0; color: #0b172a; background: #ffffff; }
+    header { padding: 56px 24px; text-align: center; background: linear-gradient(120deg, #e6f7ff, #f0fff4); }
+    h1 { margin: 0 0 8px; font-size: 32px; }
+    .tag { color: #2563eb; font-weight: 600; }
+    .cta { margin: 20px 0; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn { padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block; }
+    .primary { background: #16a34a; color: #ffffff; }
+    .secondary { border: 2px solid #16a34a; color: #16a34a; }
+    main { max-width: 900px; margin: 32px auto; padding: 0 16px; line-height: 1.6; }
+    ul { padding-left: 18px; }
+    footer { text-align: center; padding: 24px; color: #64748b; font-size: 14px; }
+    .note { font-size: 14px; color: #475569; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 24px; }
+    .card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; }
+    @media (prefers-color-scheme: dark) {
+      body { color: #e5e7eb; background: #0b172a; }
+      .secondary { border-color: #22c55e; color: #22c55e; }
+      .card { border-color: #1f2937; }
+      .tag { color: #60a5fa; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PedalCrew</h1>
+    <div class="tag">Make cycling more social, transparent, and community-driven</div>
+    <div class="cta">
+      <!-- Replace the href with your actual APK download URL (e.g. GitHub Release asset URL) -->
+      <a class="btn primary" href="DOWNLOAD_APK_URL" download>Download Android (demo)</a>
+      <!-- Replace with your Google Form / Tally / Typeform link -->
+      <a class="btn secondary" href="FEEDBACK_FORM_URL" target="_blank" rel="noopener">Give Feedback</a>
+    </div>
+  </header>
+  <main>
+    <h2>Plan and join group rides</h2>
+    <ul>
+      <li>Browse upcoming rides with filters</li>
+      <li>Join/leave with one tap</li>
+      <li>Create rides with presets and optional capacity</li>
+      <li>Ranking: Bronze, Silver, Gold, Carbon</li>
+    </ul>
+
+    <div class="grid">
+      <div class="card">
+        <h3>How to install (Android)</h3>
+        <ol>
+          <li>Tap “Download Android (demo)”.</li>
+          <li>On first install, allow installs from your browser when prompted.</li>
+          <li>Open the downloaded APK to install.</li>
+        </ol>
+        <p class="note">Tip: If blocked, go to Settings → Security → Install unknown apps and allow for your browser.</p>
+      </div>
+      <div class="card">
+        <h3>Share feedback</h3>
+        <p>Tell us what worked, what didn’t, and ideas for improvement. We read every message.</p>
+        <p><a href="FEEDBACK_FORM_URL" target="_blank" rel="noopener">Open feedback form →</a></p>
+      </div>
+    </div>
+
+    <p style="margin-top:24px"><a href="/privacy.html">Privacy Policy</a> · <a href="mailto:YOUR_EMAIL">Contact</a></p>
+  </main>
+  <footer>© 2025 PedalCrew</footer>
+</body>
+</html>
+
+
