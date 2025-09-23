@@ -5,71 +5,112 @@
   <title>PedalCrew – Group Rides, Simplified</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="description" content="Make cycling more social, transparent, and community-driven. Join and organize group rides.">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
   <style>
-    :root { color-scheme: light dark; }
+    :root { color-scheme: light dark; --green:#22c55e; --green-d:#16a34a; --blue:#60a5fa; --ink:#0b172a; --bg:#ffffff; --muted:#64748b; }
     * { box-sizing: border-box; }
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 0; color: #0b172a; background: #ffffff; }
-    header { padding: 56px 24px; text-align: center; background: linear-gradient(120deg, #e6f7ff, #f0fff4); }
-    h1 { margin: 0 0 8px; font-size: 32px; }
-    .tag { color: #2563eb; font-weight: 600; }
-    .cta { margin: 20px 0; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .btn { padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block; }
-    .primary { background: #16a34a; color: #ffffff; }
-    .secondary { border: 2px solid #16a34a; color: #16a34a; }
-    main { max-width: 900px; margin: 32px auto; padding: 0 16px; line-height: 1.6; }
-    ul { padding-left: 18px; }
-    footer { text-align: center; padding: 24px; color: #64748b; font-size: 14px; }
-    .note { font-size: 14px; color: #475569; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 24px; }
-    .card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; }
+    body { font-family: ui-rounded, system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 0; color: var(--ink); background: var(--bg); }
+    header { padding: 72px 24px 40px; text-align: center; background:
+      radial-gradient(1200px 400px at 10% -10%, rgba(34,197,94,0.15), transparent),
+      radial-gradient(1200px 400px at 90% -20%, rgba(96,165,250,0.2), transparent),
+      linear-gradient(120deg, #f0fff4, #e6f7ff);
+      position: relative;
+    }
+    .bubble { position: absolute; border-radius: 9999px; filter: blur(12px); opacity: 0.5; }
+    .b1 { width: 180px; height: 180px; background: #bbf7d0; left: 6%; top: 10%; }
+    .b2 { width: 140px; height: 140px; background: #bfdbfe; right: 8%; top: 20%; }
+    h1 { margin: 0 0 10px; font-size: 40px; letter-spacing: 0.2px; }
+    .eyebrow { display: inline-block; padding: 6px 12px; border-radius: 999px; background: #ffffff; color: #0891b2; font-weight: 700; box-shadow: 0 4px 20px rgba(2,132,199,0.15); }
+    .tag { margin-top: 10px; color: #2563eb; font-weight: 600; font-size: 18px; }
+    .hero { margin-top: 22px; font-size: 18px; color: #334155; }
+    .cta { margin: 26px 0; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn { padding: 14px 18px; border-radius: 999px; text-decoration: none; font-weight: 800; display: inline-block; transition: transform .05s ease, box-shadow .2s;
+           box-shadow: 0 8px 24px rgba(34,197,94,0.25); }
+    .btn:active { transform: translateY(1px); }
+    .primary { background: var(--green); color: #ffffff; }
+    .secondary { border: 3px dashed var(--green); color: var(--green-d); background: #ffffff; }
+    .cloud { max-width: 980px; margin: -24px auto 0; padding: 18px; }
+    .cloud-inner { background: #ffffff; border-radius: 30px; padding: 18px; box-shadow: 0 10px 40px rgba(2,6,23,0.08); }
+    main { max-width: 980px; margin: 22px auto 32px; padding: 0 16px; line-height: 1.6; }
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 16px; }
+    .card { border: 2px dashed #e2e8f0; border-radius: 20px; padding: 16px; background: #ffffff; }
+    .card h3 { margin-top: 0; }
+    .panel { border-radius: 20px; padding: 0; overflow: hidden; border: 2px solid #e2e8f0; background: #ffffff; }
+    .panel-head { padding: 14px 16px; background: #f0f9ff; font-weight: 700; color: #0369a1; }
+    iframe.form { width: 100%; height: 720px; border: 0; }
+    .footer-links { text-align: center; margin-top: 24px; }
+    footer { text-align: center; padding: 28px; color: var(--muted); font-size: 14px; }
     @media (prefers-color-scheme: dark) {
-      body { color: #e5e7eb; background: #0b172a; }
-      .secondary { border-color: #22c55e; color: #22c55e; }
-      .card { border-color: #1f2937; }
-      .tag { color: #60a5fa; }
+      :root { --bg:#0b172a; --ink:#e5e7eb; }
+      header { background:
+        radial-gradient(1200px 400px at 10% -10%, rgba(34,197,94,0.12), transparent),
+        radial-gradient(1200px 400px at 90% -20%, rgba(96,165,250,0.18), transparent),
+        linear-gradient(120deg, #0b172a, #0f172a);
+      }
+      .eyebrow { background: #0b172a; color: #67e8f9; box-shadow: 0 6px 30px rgba(14,165,233,0.15); }
+      .secondary { background: transparent; border-color: #22c55e; color: #22c55e; }
+      .cloud-inner, .card, .panel { background: #0b172a; border-color: #1f2937; }
+      .panel-head { background: #082f49; color: #93c5fd; }
     }
   </style>
 </head>
 <body>
   <header>
+    <span class="eyebrow">Welcome, rider! 🚴‍♀️</span>
     <h1>PedalCrew</h1>
-    <div class="tag">Make cycling more social, transparent, and community-driven</div>
+    <div class="tag">Make cycling more social, transparent, and community‑driven</div>
+    <p class="hero">Join rides near you, create your own, and grow with the crew.</p>
     <div class="cta">
-      <!-- Replace the href with your actual APK download URL (e.g. GitHub Release asset URL) -->
-      <a class="btn primary" href="DOWNLOAD_APK_URL" download>Download Android (demo)</a>
-      <!-- Replace with your Google Form / Tally / Typeform link -->
-      <a class="btn secondary" href="FEEDBACK_FORM_URL" target="_blank" rel="noopener">Give Feedback</a>
+      <a class="btn primary" href="DOWNLOAD_APK_URL" download>⬇️ Download Android (demo)</a>
+      <a class="btn secondary" href="#feedback">💬 Share Feedback</a>
     </div>
+    <div class="bubble b1"></div>
+    <div class="bubble b2"></div>
   </header>
-  <main>
-    <h2>Plan and join group rides</h2>
-    <ul>
-      <li>Browse upcoming rides with filters</li>
-      <li>Join/leave with one tap</li>
-      <li>Create rides with presets and optional capacity</li>
-      <li>Ranking: Bronze, Silver, Gold, Carbon</li>
-    </ul>
 
-    <div class="grid">
-      <div class="card">
-        <h3>How to install (Android)</h3>
-        <ol>
-          <li>Tap “Download Android (demo)”.</li>
-          <li>On first install, allow installs from your browser when prompted.</li>
-          <li>Open the downloaded APK to install.</li>
-        </ol>
-        <p class="note">Tip: If blocked, go to Settings → Security → Install unknown apps and allow for your browser.</p>
-      </div>
-      <div class="card">
-        <h3>Share feedback</h3>
-        <p>Tell us what worked, what didn’t, and ideas for improvement. We read every message.</p>
-        <p><a href="FEEDBACK_FORM_URL" target="_blank" rel="noopener">Open feedback form →</a></p>
-      </div>
+  <div class="cloud">
+    <div class="cloud-inner">
+      <main>
+        <h2>Why you’ll love it</h2>
+        <div class="features">
+          <div class="card"><h3>Discover rides</h3><p>Browse upcoming rides with filters and find your pace.</p></div>
+          <div class="card"><h3>One‑tap join</h3><p>Hop in or out instantly. No group chat chaos.</p></div>
+          <div class="card"><h3>Create easily</h3><p>Set route, date, capacity and vibe in seconds.</p></div>
+          <div class="card"><h3>Level up</h3><p>Bronze → Silver → Gold → Carbon. Earn it on the road.</p></div>
+        </div>
+
+        <section id="install" style="margin-top:24px">
+          <div class="panel">
+            <div class="panel-head">How to install (Android)</div>
+            <div style="padding:16px">
+              <ol>
+                <li>Tap “Download Android (demo)”.</li>
+                <li>If prompted, allow installs from your browser.</li>
+                <li>Open the APK to install.</li>
+              </ol>
+              <p class="note">If blocked: Settings → Security → Install unknown apps → Allow for your browser.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="feedback" style="margin-top:24px">
+          <div class="panel">
+            <div class="panel-head">Tell us what you think</div>
+            <div style="padding:0">
+              <!-- Replace the src with your Google Forms embed link (see README) -->
+              <iframe class="form" src="https://docs.google.com/forms/d/e/1FAIpQLSdgwpK2mvSkd_B462AEX1YrhiJTCrR4UiFvk8uniIulwFP3iQ/viewform?embedded=true" title="Feedback form" loading="lazy"></iframe>
+              <div style="padding:12px 16px; border-top: 2px solid #e2e8f0;">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgwpK2mvSkd_B462AEX1YrhiJTCrR4UiFvk8uniIulwFP3iQ/viewform?usp=dialog" target="_blank" rel="noopener">Open the form in a new tab →</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <p class="footer-links"><a href="privacy.html">Privacy Policy</a> · <a href="mailto:developmentbigi@gmail.com">Contact</a></p>
+      </main>
     </div>
+  </div>
 
-    <p style="margin-top:24px"><a href="/privacy.html">Privacy Policy</a> · <a href="mailto:YOUR_EMAIL">Contact</a></p>
-  </main>
   <footer>© 2025 PedalCrew</footer>
 </body>
 </html>

@@ -3,13 +3,14 @@
 Lightweight static site to share Android demo builds and collect feedback. Free to host, minimal to maintain.
 
 ## Files
-- `index.html` – landing page with download + feedback links
+- `index.html` – landing page with download + embedded feedback form
 - `privacy.html` – minimal privacy policy
 - `favicon.svg` – site icon
 
 Update these placeholders in `index.html` before publishing:
 - `DOWNLOAD_APK_URL` – direct link to your APK (e.g., GitHub Release asset)
-- `FEEDBACK_FORM_URL` – Google Form/Tally/Typeform link
+- `GOOGLE_FORMS_EMBED_URL` – Google Forms embed URL (see below)
+- `FEEDBACK_FORM_URL` – link to the same form (fallback/open in new tab)
 - `YOUR_EMAIL` – your contact email (also in `privacy.html`)
 
 ---
@@ -53,12 +54,18 @@ Alternative (also free):
 
 ## Feedback form
 
-1) Create a quick form (Google Forms / Tally / Typeform) with fields like:
+1) Create a quick form (Google Forms recommended for easy embed) with fields like:
    - Device model, Android version
    - What worked well? What didn’t?
    - Suggestions or bugs
-2) Copy the public form link and replace `FEEDBACK_FORM_URL` in `index.html`.
-3) Optionally add the same link inside the app using `url_launcher`.
+2) Get the embed URL:
+   - Google Forms → Send → Embed <> → Copy the `src` URL from the iframe.
+   - Paste that into `GOOGLE_FORMS_EMBED_URL` in `index.html`.
+3) Also copy the public link and set `FEEDBACK_FORM_URL` (used as a fallback link under the embed).
+4) Optionally add the same link inside the app using `url_launcher`.
+
+### If the form fails to load on GitHub Pages
+- Some corporate networks block Google domains in iframes. The fallback link is provided right under the embed.
 
 ---
 
@@ -79,5 +86,6 @@ firebase deploy --only hosting
 ## Notes
 - This site has no backend and stores no data; privacy is simple by design.
 - For iOS demos, TestFlight via Apple Developer account is the practical route.
+ - On GitHub Pages, prefer relative links (`favicon.svg`, `privacy.html`, `index.html`) to avoid 404s.
 
 
