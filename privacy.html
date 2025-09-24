@@ -15,41 +15,47 @@
 </head>
 <body>
   <h1>Privacy Policy</h1>
-  <p>Last updated: 2025‑09‑23</p>
+  <p>Last updated: 2025‑09‑24</p>
 
   <p>PedalCrew is currently in a limited demo/testing phase. This website is a simple static page that does not use cookies or track you. We do not collect personal data on this website.</p>
 
   <h2>Mobile app</h2>
-  <p>The PedalCrew Android app connects to third‑party services to provide core features. These may include Firebase services such as Authentication, Firestore/Database, Cloud Functions, Crashlytics, and optionally Analytics (only if you consent in settings). Your usage of the app is subject to the privacy policies of those providers.</p>
+  <p>The PedalCrew Android app connects to third‑party services to provide core features. These include Firebase services such as Authentication, Firestore (database), Storage (for route files and avatars), Crashlytics (crash reporting), and optionally Analytics (only if you consent in settings). Your usage of the app is subject to the privacy policies of those providers.</p>
 
   <h3>What we collect in the app</h3>
   <ul>
     <li><strong>Account basics</strong>: your Google account UID, email, display name, and optional photo URL.</li>
     <li><strong>Profile fields you provide</strong>: preferred pace, home city, analytics consent, notification preferences.</li>
-    <li><strong>Ride data</strong>: rides you create or join, ride status updates, and activity feed entries.</li>
-    <li><strong>Points and ranks</strong>: totals and transactions for create/join/complete actions.</li>
+    <li><strong>Ride data</strong>: rides you create or join, participants, statuses, and activity feed entries.</li>
+    <li><strong>Points and ranks</strong>: totals and individual <em>PointsTransactions</em> for create/join/complete actions.</li>
+    <li><strong>Route files (optional)</strong>: GPX files you choose to upload to show a course preview; we parse distance/elevation and store the file in Firebase Storage.</li>
     <li><strong>Crash reports</strong>: if enabled, anonymized crash and performance data to improve stability.</li>
-    <li><strong>Analytics</strong>: if you opt in, anonymous usage events such as login, ride create/join/leave, filter apply.</li>
+    <li><strong>Analytics (optional)</strong>: if you opt in, anonymous usage events such as login, ride create/join/leave/complete, filter apply, share, etc.</li>
   </ul>
 
   <h3>Permissions</h3>
-  <p>The demo build may request network access and Google Sign‑In. We do not request location, contacts, or storage access in this demo scope.</p>
+  <ul>
+    <li><strong>Location (optional)</strong>: if you choose “Use my location” when creating a ride, the app requests location to set a start point. Location data is not tracked in the background.</li>
+    <li><strong>File access (optional)</strong>: when you import a GPX file, the app requests access to the selected file to upload it to Firebase Storage and compute distance/elevation.</li>
+    <li><strong>Network & Google Sign‑In</strong>: required for core functionality.</li>
+  </ul>
 
   <h3>How we use your data</h3>
   <ul>
     <li>To authenticate you and keep your account in sync across sessions.</li>
     <li>To show, create, and manage rides and participation.</li>
-    <li>To compute points and rank levels.</li>
+    <li>To compute points and rank levels, including per‑action PointsTransactions.</li>
     <li>To improve app quality via crash reports and, if enabled, analytics.</li>
   </ul>
 
   <h3>Data retention</h3>
-  <p>Profile and ride data remains in the database until deleted. You can request account deletion at any time (Settings → Delete account in‑app, or email us). Crash and analytics data follow the retention policies of the underlying providers.</p>
+  <p>Profile and ride data remains in the database until deleted. You can request account deletion at any time (Settings → Delete account in‑app, or email us). Crash and analytics data follow the retention policies of the underlying providers. Uploaded GPX files remain in Firebase Storage until deleted with the associated ride or by request.</p>
 
   <h3>Your choices</h3>
   <ul>
     <li>Use the in‑app toggle to opt in/out of analytics at any time.</li>
     <li>Request account deletion and associated data removal.</li>
+    <li>Do not grant optional permissions (location, file access) if you prefer.</li>
     <li>Contact us with any privacy questions.</li>
   </ul>
 
@@ -65,5 +71,3 @@
   <p><a href="index.html">← Back to home</a></p>
 </body>
 </html>
-
-
