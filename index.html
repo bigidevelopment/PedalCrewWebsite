@@ -10,48 +10,76 @@
   <meta property="og:description" content="Make cycling more social, transparent, and community‑driven. Join and organize group rides.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="favicon.svg">
+  <meta property="og:site_name" content="PedalCrew">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:site" content="@pedalcrew">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="PedalCrew – Group Rides, Simplified">
   <meta name="twitter:description" content="Make cycling more social, transparent, and community‑driven. Join and organize group rides.">
   <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
   <style>
-    :root { color-scheme: light dark; --green:#22c55e; --green-d:#16a34a; --blue:#60a5fa; --ink:#0b172a; --bg:#ffffff; --muted:#64748b; }
+    :root { color-scheme: light dark; --green:#22c55e; --green-d:#16a34a; --blue:#60a5fa; --ink:#0b172a; --bg:#ffffff; --muted:#64748b; --surface:#ffffff; --border:#e2e8f0; --amber:#f59e0b; }
     * { box-sizing: border-box; }
     body { font-family: ui-rounded, system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 0; color: var(--ink); background: var(--bg); }
-    header { padding: 72px 24px 40px; text-align: center; background:
+    header { padding: 92px 24px 56px; text-align: center; background:
       radial-gradient(1200px 400px at 10% -10%, rgba(34,197,94,0.15), transparent),
       radial-gradient(1200px 400px at 90% -20%, rgba(96,165,250,0.2), transparent),
       linear-gradient(120deg, #f0fff4, #e6f7ff);
       position: relative;
     }
-    .bubble { position: absolute; border-radius: 9999px; filter: blur(12px); opacity: 0.5; }
-    .b1 { width: 180px; height: 180px; background: #bbf7d0; left: 6%; top: 10%; }
-    .b2 { width: 140px; height: 140px; background: #bfdbfe; right: 8%; top: 20%; }
-    h1 { margin: 0 0 10px; font-size: 40px; letter-spacing: 0.2px; }
+    .bubble { position: absolute; border-radius: 9999px; filter: blur(12px); opacity: 0.5; animation: float 12s ease-in-out infinite; will-change: transform; }
+    .b1 { width: 200px; height: 200px; background: #bbf7d0; left: 6%; top: 10%; animation-delay: 0s; }
+    .b2 { width: 160px; height: 160px; background: #bfdbfe; right: 8%; top: 20%; animation-delay: 2s; }
+    .b3 { width: 120px; height: 120px; background: #dcfce7; left: 20%; bottom: 4%; animation-delay: 1s; }
+    h1 { margin: 0 0 10px; font-size: 48px; letter-spacing: 0.2px; background: linear-gradient(90deg, #0b172a, #16a34a, #2563eb, #0b172a); -webkit-background-clip: text; background-clip: text; color: transparent; background-size: 200% 100%; animation: gradientMove 10s linear infinite; }
     .eyebrow { display: inline-block; padding: 6px 12px; border-radius: 999px; background: #ffffff; color: #0891b2; font-weight: 700; box-shadow: 0 4px 20px rgba(2,132,199,0.15); }
-    .tag { margin-top: 10px; color: #2563eb; font-weight: 600; font-size: 18px; }
-    .hero { margin-top: 22px; font-size: 18px; color: #334155; }
-    .cta { margin: 26px 0; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-    .btn { padding: 14px 18px; border-radius: 999px; text-decoration: none; font-weight: 800; display: inline-block; transition: transform .05s ease, box-shadow .2s;
-           box-shadow: 0 8px 24px rgba(34,197,94,0.25); }
+    .tag { margin-top: 10px; color: #2563eb; font-weight: 700; font-size: 18px; letter-spacing: .2px; }
+    .hero { margin-top: 22px; font-size: 18px; color: #334155; max-width: 820px; margin-left: auto; margin-right: auto; }
+    .cta { margin: 30px 0; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn { padding: 14px 18px; border-radius: 999px; text-decoration: none; font-weight: 800; display: inline-block; transition: transform .05s ease, box-shadow .2s, background .2s, color .2s; box-shadow: 0 8px 24px rgba(34,197,94,0.25); }
     .btn:active { transform: translateY(1px); }
     .primary { background: var(--green); color: #ffffff; }
+    .primary:hover { box-shadow: 0 12px 28px rgba(34,197,94,0.35); }
     .secondary { border: 3px dashed var(--green); color: var(--green-d); background: #ffffff; }
-    .cloud { max-width: 980px; margin: -24px auto 0; padding: 18px; }
-    .cloud-inner { background: #ffffff; border-radius: 30px; padding: 18px; box-shadow: 0 10px 40px rgba(2,6,23,0.08); }
+    .secondary:hover { background: #ecfdf5; }
+    .ghost { border: 2px solid #a7f3d0; color: #065f46; background: transparent; }
+    .cloud { max-width: 1080px; margin: -24px auto 0; padding: 18px; }
+    .cloud-inner { background: var(--surface); border-radius: 30px; padding: 18px; box-shadow: 0 10px 40px rgba(2,6,23,0.08); }
     main { max-width: 980px; margin: 22px auto 32px; padding: 0 16px; line-height: 1.6; }
+    .badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+    .badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; background: #ffffff; border: 1px solid var(--border); color: #065f46; font-weight: 700; box-shadow: 0 4px 18px rgba(2,6,23,0.06); }
     .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 16px; }
-    .card { border: 2px dashed #e2e8f0; border-radius: 20px; padding: 16px; background: #ffffff; }
+    .card { border: 2px dashed var(--border); border-radius: 20px; padding: 16px; background: var(--surface); transform: translateY(6px); transition: transform .2s ease, box-shadow .2s ease; }
+    .card:hover { transform: translateY(0); box-shadow: 0 12px 30px rgba(2,6,23,0.10); }
     .card h3 { margin-top: 0; }
-    .panel { border-radius: 20px; padding: 0; overflow: hidden; border: 2px solid #e2e8f0; background: #ffffff; }
-    .panel-head { padding: 14px 16px; background: #f0f9ff; font-weight: 700; color: #0369a1; }
+    .panel { border-radius: 20px; padding: 0; overflow: hidden; border: 2px solid var(--border); background: var(--surface); }
+    .panel-head { padding: 14px 16px; background: #f0f9ff; font-weight: 700; color: #0369a1; position: sticky; top: 0; }
     iframe.form { width: 100%; height: 720px; border: 0; }
     .footer-links { text-align: center; margin-top: 24px; }
     footer { text-align: center; padding: 28px; color: var(--muted); font-size: 14px; }
     .note { color: var(--muted); font-size: 14px; }
     .small { font-size: 14px; color: var(--muted); }
+    .reveal { opacity: 0; transform: translateY(14px); }
+    .reveal.visible { opacity: 1; transform: translateY(0); transition: all .6s cubic-bezier(.21, .9, .26, 1); }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 18px 0 6px; }
+    .stat { background: #ffffff; border: 2px solid var(--border); border-radius: 18px; padding: 12px; text-align: center; }
+    .stat .num { font-weight: 900; font-size: 22px; color: #065f46; }
+    .stat .lbl { font-size: 13px; color: var(--muted); }
+    .timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .step { border: 2px solid var(--border); border-radius: 16px; padding: 14px; background: var(--surface); }
+    .kicker { font-weight: 800; color: #0891b2; font-size: 12px; letter-spacing: .4px; text-transform: uppercase; }
+    .quote { border-left: 4px solid var(--green); padding: 12px 16px; background: #f0fff4; border-radius: 12px; }
+    .roadmap { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 999px; border: 1px solid var(--border); background: #ffffff; margin: 4px 6px 0 0; font-weight: 700; }
+    .chip.done { background: #ecfdf5; color: #065f46; border-color: #a7f3d0; }
+    .chip.next { background: #eff6ff; color: #1e40af; border-color: #bfdbfe; }
+    .subtle { color: var(--muted); font-size: 13px; }
+
+    @keyframes float { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-18px) } }
+    @keyframes gradientMove { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+
     @media (prefers-color-scheme: dark) {
-      :root { --bg:#0b172a; --ink:#e5e7eb; }
+      :root { --bg:#0b172a; --ink:#e5e7eb; --surface:#0b172a; --border:#1f2937; }
       header { background:
         radial-gradient(1200px 400px at 10% -10%, rgba(34,197,94,0.12), transparent),
         radial-gradient(1200px 400px at 90% -20%, rgba(96,165,250,0.18), transparent),
@@ -59,8 +87,10 @@
       }
       .eyebrow { background: #0b172a; color: #67e8f9; box-shadow: 0 6px 30px rgba(14,165,233,0.15); }
       .secondary { background: transparent; border-color: #22c55e; color: #22c55e; }
-      .cloud-inner, .card, .panel { background: #0b172a; border-color: #1f2937; }
+      .ghost { border-color: #134e4a; color: #a7f3d0; }
+      .cloud-inner, .card, .panel, .stat, .chip { background: #0b172a; border-color: #1f2937; }
       .panel-head { background: #082f49; color: #93c5fd; }
+      .quote { background: #052e16; }
     }
   </style>
 </head>
@@ -69,25 +99,40 @@
     <span class="eyebrow">Welcome, rider! 🚴‍♀️</span>
     <h1>PedalCrew</h1>
     <div class="tag">Make cycling more social, transparent, and community‑driven</div>
-    <p class="hero">Join rides near you, create your own, and grow with the crew.</p>
+    <p class="hero">Plan upcoming rides with friends and clubs. No chat chaos, no spreadsheets—just clear routes, easy joins, and a simple way to grow your cycling crew.</p>
+    <div class="badges">
+      <span class="badge">⚡ Built with Flutter + Firebase</span>
+      <span class="badge">🔒 Privacy‑respecting</span>
+      <span class="badge">🥇 Level up as you ride</span>
+    </div>
     <div class="cta">
       <!-- Replace GITHUB_RELEASE_APK_URL with your GitHub Releases APK link, e.g., https://github.com/OWNER/REPO/releases/latest/download/app-release.apk -->
-      <a class="btn primary" href="GITHUB_RELEASE_APK_URL" download>⬇️ Download Android (demo)</a>
-      <a class="btn secondary" href="#feedback">💬 Share Feedback</a>
+      <a class="btn primary" href="GITHUB_RELEASE_APK_URL" download aria-label="Download PedalCrew Android demo APK">⬇️ Download Android (demo)</a>
+      <a class="btn secondary" href="#inside">👀 See what’s inside</a>
+      <a class="btn ghost" href="#feedback">💬 Share feedback</a>
+      <a class="btn ghost" href="https://bigidevelopment.github.io/PedalCrewWebsite/terms.html" target="_blank" rel="noopener" aria-label="PedalCrew Terms of Service">🔖 Terms</a>
     </div>
     <div class="bubble b1"></div>
     <div class="bubble b2"></div>
+    <div class="bubble b3"></div>
   </header>
 
   <div class="cloud">
     <div class="cloud-inner">
       <main>
-        <h2>Why you’ll love it</h2>
+        <h2 id="inside" class="reveal">Why you’ll love it</h2>
         <div class="features">
-          <div class="card"><h3>Discover rides</h3><p>Browse upcoming rides with filters and find your pace.</p></div>
-          <div class="card"><h3>One‑tap join</h3><p>Hop in or out instantly. No group chat chaos.</p></div>
-          <div class="card"><h3>Create easily</h3><p>Set route, date, capacity and vibe in seconds.</p></div>
-          <div class="card"><h3>Level up</h3><p>Bronze → Silver → Gold → Carbon. Earn it on the road.</p></div>
+          <div class="card reveal"><h3>Discover rides</h3><p>Browse upcoming rides with filters and find your pace.</p></div>
+          <div class="card reveal"><h3>One‑tap join</h3><p>Hop in or out instantly. No group chat chaos.</p></div>
+          <div class="card reveal"><h3>Create easily</h3><p>Set route, date, capacity and vibe in seconds.</p></div>
+          <div class="card reveal"><h3>Level up</h3><p>Bronze → Silver → Gold → Carbon. Earn it on the road.</p></div>
+        </div>
+
+        <div class="stats reveal" aria-label="product highlights">
+          <div class="stat"><div class="num">10s</div><div class="lbl">to create a ride</div></div>
+          <div class="stat"><div class="num">1‑tap</div><div class="lbl">join/leave</div></div>
+          <div class="stat"><div class="num">0</div><div class="lbl">chat chaos</div></div>
+          <div class="stat"><div class="num">4 levels</div><div class="lbl">Bronze → Carbon</div></div>
         </div>
 
         <section id="install" style="margin-top:24px">
@@ -122,6 +167,19 @@
           </div>
         </section>
 
+        <section id="how" style="margin-top:24px">
+          <div class="panel reveal">
+            <div class="panel-head">How it works</div>
+            <div style="padding:16px">
+              <div class="timeline">
+                <div class="step"><div class="kicker">1. Create</div><div>Set title, pace, route, and capacity. Add an optional join deadline.</div></div>
+                <div class="step"><div class="kicker">2. Share</div><div>Send the link. Friends join in one tap—no login loops.</div></div>
+                <div class="step"><div class="kicker">3. Ride</div><div>See who’s in, keep updates clear, and mark complete for points.</div></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section id="requirements" style="margin-top:24px">
           <div class="panel">
             <div class="panel-head">Requirements & known limitations</div>
@@ -132,6 +190,43 @@
                 <li>Internet connection to load rides and sync actions</li>
               </ul>
               <p class="note">If install fails or sign‑in doesn’t work, please tell us your device model and Android version in the feedback.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="social-proof" style="margin-top:24px">
+          <div class="panel reveal">
+            <div class="panel-head">Why riders are excited</div>
+            <div style="padding:16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+              <div class="quote">“Finally, rides without endless chat scroll. Joining takes seconds.”</div>
+              <div class="quote">“Perfect for our club—clear capacity, simple rules, and waitlist.”</div>
+              <div class="quote">“Love the points. It actually motivates me to show up.”</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="roadmap" style="margin-top:24px">
+          <div class="panel reveal">
+            <div class="panel-head">Roadmap to MVP</div>
+            <div style="padding:16px">
+              <div class="roadmap">
+                <div>
+                  <div class="kicker">Shipped</div>
+                  <div class="chip done">Google Sign‑In</div>
+                  <div class="chip done">Create & Join rides</div>
+                  <div class="chip done">Ride feed & filters</div>
+                  <div class="chip done">Ranking points</div>
+                  <div class="chip done">Activity feed</div>
+                </div>
+                <div>
+                  <div class="kicker">Next up</div>
+                  <div class="chip next">Join deadline UX</div>
+                  <div class="chip next">Points history</div>
+                  <div class="chip next">Better notifications</div>
+                  <div class="chip next">Deep links polish</div>
+                </div>
+              </div>
+              <p class="subtle" style="margin-top:8px">Want something else? Tell us below—your feedback shapes the roadmap.</p>
             </div>
           </div>
         </section>
@@ -164,12 +259,26 @@
           </div>
         </section>
 
-        <p class="footer-links"><a href="privacy.html">Privacy Policy</a> · <a href="mailto:developmentbigi@gmail.com">Contact</a> · <a href="GITHUB_RELEASES_PAGE" target="_blank" rel="noopener">GitHub Releases</a></p>
+        <p class="footer-links"><a href="https://bigidevelopment.github.io/PedalCrewWebsite/terms.html" target="_blank" rel="noopener">Terms</a> · <a href="privacy.html">Privacy Policy</a> · <a href="mailto:developmentbigi@gmail.com">Contact</a> · <a href="GITHUB_RELEASES_PAGE" target="_blank" rel="noopener">GitHub Releases</a></p>
       </main>
     </div>
   </div>
 
   <footer>© 2025 PedalCrew</footer>
+
+  <script>
+    (function() {
+      var els = [].slice.call(document.querySelectorAll('.reveal'));
+      if (!('IntersectionObserver' in window) || els.length === 0) {
+        els.forEach(function(el){ el.classList.add('visible'); });
+        return;
+      }
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry){ if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); } });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+      els.forEach(function(el){ io.observe(el); });
+    })();
+  </script>
 </body>
 </html>
 
