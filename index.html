@@ -1,285 +1,1308 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>PedalCrew – Group Rides, Simplified</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="description" content="Make cycling more social, transparent, and community-driven. Join and organize group rides.">
-  <meta name="theme-color" content="#16a34a">
-  <meta property="og:title" content="PedalCrew – Group Rides, Simplified">
-  <meta property="og:description" content="Make cycling more social, transparent, and community‑driven. Join and organize group rides.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="favicon.svg">
-  <meta property="og:site_name" content="PedalCrew">
-  <meta property="og:locale" content="en_US">
-  <meta name="twitter:site" content="@pedalcrew">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="PedalCrew – Group Rides, Simplified">
-  <meta name="twitter:description" content="Make cycling more social, transparent, and community‑driven. Join and organize group rides.">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
-  <style>
-    :root { color-scheme: light dark; --green:#22c55e; --green-d:#16a34a; --blue:#60a5fa; --ink:#0b172a; --bg:#ffffff; --muted:#64748b; --surface:#ffffff; --border:#e2e8f0; --amber:#f59e0b; }
-    * { box-sizing: border-box; }
-    body { font-family: ui-rounded, system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 0; color: var(--ink); background: var(--bg); }
-    header { padding: 92px 24px 56px; text-align: center; background:
-      radial-gradient(1200px 400px at 10% -10%, rgba(34,197,94,0.15), transparent),
-      radial-gradient(1200px 400px at 90% -20%, rgba(96,165,250,0.2), transparent),
-      linear-gradient(120deg, #f0fff4, #e6f7ff);
-      position: relative;
-    }
-    .bubble { position: absolute; border-radius: 9999px; filter: blur(12px); opacity: 0.5; animation: float 12s ease-in-out infinite; will-change: transform; }
-    .b1 { width: 200px; height: 200px; background: #bbf7d0; left: 6%; top: 10%; animation-delay: 0s; }
-    .b2 { width: 160px; height: 160px; background: #bfdbfe; right: 8%; top: 20%; animation-delay: 2s; }
-    .b3 { width: 120px; height: 120px; background: #dcfce7; left: 20%; bottom: 4%; animation-delay: 1s; }
-    h1 { margin: 0 0 10px; font-size: 48px; letter-spacing: 0.2px; background: linear-gradient(90deg, #0b172a, #16a34a, #2563eb, #0b172a); -webkit-background-clip: text; background-clip: text; color: transparent; background-size: 200% 100%; animation: gradientMove 10s linear infinite; }
-    .eyebrow { display: inline-block; padding: 6px 12px; border-radius: 999px; background: #ffffff; color: #0891b2; font-weight: 700; box-shadow: 0 4px 20px rgba(2,132,199,0.15); }
-    .tag { margin-top: 10px; color: #2563eb; font-weight: 700; font-size: 18px; letter-spacing: .2px; }
-    .hero { margin-top: 22px; font-size: 18px; color: #334155; max-width: 820px; margin-left: auto; margin-right: auto; }
-    .cta { margin: 30px 0; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-    .btn { padding: 14px 18px; border-radius: 999px; text-decoration: none; font-weight: 800; display: inline-block; transition: transform .05s ease, box-shadow .2s, background .2s, color .2s; box-shadow: 0 8px 24px rgba(34,197,94,0.25); }
-    .btn:active { transform: translateY(1px); }
-    .primary { background: var(--green); color: #ffffff; }
-    .primary:hover { box-shadow: 0 12px 28px rgba(34,197,94,0.35); }
-    .secondary { border: 3px dashed var(--green); color: var(--green-d); background: #ffffff; }
-    .secondary:hover { background: #ecfdf5; }
-    .ghost { border: 2px solid #a7f3d0; color: #065f46; background: transparent; }
-    .cloud { max-width: 1080px; margin: -24px auto 0; padding: 18px; }
-    .cloud-inner { background: var(--surface); border-radius: 30px; padding: 18px; box-shadow: 0 10px 40px rgba(2,6,23,0.08); }
-    main { max-width: 980px; margin: 22px auto 32px; padding: 0 16px; line-height: 1.6; }
-    .badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
-    .badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; background: #ffffff; border: 1px solid var(--border); color: #065f46; font-weight: 700; box-shadow: 0 4px 18px rgba(2,6,23,0.06); }
-    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 16px; }
-    .card { border: 2px dashed var(--border); border-radius: 20px; padding: 16px; background: var(--surface); transform: translateY(6px); transition: transform .2s ease, box-shadow .2s ease; }
-    .card:hover { transform: translateY(0); box-shadow: 0 12px 30px rgba(2,6,23,0.10); }
-    .card h3 { margin-top: 0; }
-    .panel { border-radius: 20px; padding: 0; overflow: hidden; border: 2px solid var(--border); background: var(--surface); }
-    .panel-head { padding: 14px 16px; background: #f0f9ff; font-weight: 700; color: #0369a1; position: sticky; top: 0; }
-    iframe.form { width: 100%; height: 720px; border: 0; }
-    .footer-links { text-align: center; margin-top: 24px; }
-    footer { text-align: center; padding: 28px; color: var(--muted); font-size: 14px; }
-    .note { color: var(--muted); font-size: 14px; }
-    .small { font-size: 14px; color: var(--muted); }
-    .reveal { opacity: 0; transform: translateY(14px); }
-    .reveal.visible { opacity: 1; transform: translateY(0); transition: all .6s cubic-bezier(.21, .9, .26, 1); }
-    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 18px 0 6px; }
-    .stat { background: #ffffff; border: 2px solid var(--border); border-radius: 18px; padding: 12px; text-align: center; }
-    .stat .num { font-weight: 900; font-size: 22px; color: #065f46; }
-    .stat .lbl { font-size: 13px; color: var(--muted); }
-    .timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-    .step { border: 2px solid var(--border); border-radius: 16px; padding: 14px; background: var(--surface); }
-    .kicker { font-weight: 800; color: #0891b2; font-size: 12px; letter-spacing: .4px; text-transform: uppercase; }
-    .quote { border-left: 4px solid var(--green); padding: 12px 16px; background: #f0fff4; border-radius: 12px; }
-    .roadmap { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-    .chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 999px; border: 1px solid var(--border); background: #ffffff; margin: 4px 6px 0 0; font-weight: 700; }
-    .chip.done { background: #ecfdf5; color: #065f46; border-color: #a7f3d0; }
-    .chip.next { background: #eff6ff; color: #1e40af; border-color: #bfdbfe; }
-    .subtle { color: var(--muted); font-size: 13px; }
+    <meta charset="utf-8">
+    <title>PedalCrew – Make Cycling Social</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Make cycling more social, transparent, and community-driven. Join the beta and help shape the future of group rides.">
+    <meta name="theme-color" content="#16a34a">
+    <meta property="og:title" content="PedalCrew – Make Cycling Social">
+    <meta property="og:description" content="Make cycling more social, transparent, and community‑driven. Join the beta and help shape the future of group rides.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="favicon.svg">
+    <meta property="og:site_name" content="PedalCrew">
+    <meta property="og:locale" content="en_US">
+    <link rel="icon" href="logo.svg" type="image/svg+xml"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-green: #16a34a;
+            --primary-dark: #15803d;
+            --primary-light: #22c55e;
+            --accent-green: #dcfce7;
+            --dark-bg: #0a0a0a;
+            --dark-surface: #111111;
+            --dark-border: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --gradient-primary: linear-gradient(135deg, #16a34a 0%, #059669 50%, #047857 100%);
+            --gradient-hero: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #111111 100%);
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --shadow-glow: 0 0 40px rgba(22, 163, 74, 0.3);
+        }
 
-    @keyframes float { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-18px) } }
-    @keyframes gradientMove { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    @media (prefers-color-scheme: dark) {
-      :root { --bg:#0b172a; --ink:#e5e7eb; --surface:#0b172a; --border:#1f2937; }
-      header { background:
-        radial-gradient(1200px 400px at 10% -10%, rgba(34,197,94,0.12), transparent),
-        radial-gradient(1200px 400px at 90% -20%, rgba(96,165,250,0.18), transparent),
-        linear-gradient(120deg, #0b172a, #0f172a);
-      }
-      .eyebrow { background: #0b172a; color: #67e8f9; box-shadow: 0 6px 30px rgba(14,165,233,0.15); }
-      .secondary { background: transparent; border-color: #22c55e; color: #22c55e; }
-      .ghost { border-color: #134e4a; color: #a7f3d0; }
-      .cloud-inner, .card, .panel, .stat, .chip { background: #0b172a; border-color: #1f2937; }
-      .panel-head { background: #082f49; color: #93c5fd; }
-      .quote { background: #052e16; }
-    }
-  </style>
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--dark-border);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .nav-brand img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-cta {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient-hero);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(22, 163, 74, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(5, 150, 105, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(22, 163, 74, 0.1);
+            border: 1px solid rgba(22, 163, 74, 0.2);
+            color: var(--primary-light);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl), var(--shadow-glow);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-1px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-light);
+            display: block;
+        }
+
+        .hero-stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        .phone-mockup {
+            position: relative;
+            width: 300px;
+            height: 600px;
+            background: linear-gradient(145deg, #1a1a1a, #111111);
+            border-radius: 40px;
+            padding: 8px;
+            box-shadow: var(--shadow-xl);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--dark-border);
+        }
+
+        .phone-header {
+            height: 60px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .phone-content {
+            padding: 1rem;
+            height: calc(100% - 60px);
+            overflow: hidden;
+        }
+
+        .phone-card {
+            background: var(--dark-surface);
+            border: 1px solid var(--dark-border);
+            border-radius: 16px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            animation: shimmer 2s ease-in-out infinite;
+        }
+
+        .phone-bar {
+            height: 12px;
+            background: var(--text-muted);
+            border-radius: 6px;
+            margin-bottom: 8px;
+            opacity: 0.3;
+        }
+
+        .phone-bar.short { width: 60%; }
+        .phone-bar.medium { width: 80%; }
+        .phone-bar.long { width: 100%; }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            background: var(--dark-surface);
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .features-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .features-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--dark-bg);
+            border: 1px solid var(--dark-border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-green);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Story Section */
+        .story {
+            padding: 6rem 0;
+            background: var(--gradient-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .story-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .story-content {
+            color: white;
+        }
+
+        .story-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+
+        .story-cta {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .story-cta:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .story-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .story-stat {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .story-stat-number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: white;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .story-stat-label {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            background: var(--dark-bg);
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .cta-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .cta-stats {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            opacity: 0.8;
+        }
+
+        .cta-stat {
+            text-align: center;
+        }
+
+        .cta-stat-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-light);
+        }
+
+        .cta-stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .cta-divider {
+            width: 1px;
+            height: 40px;
+            background: var(--dark-border);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2rem 0;
+            background: var(--dark-surface);
+            border-top: 1px solid var(--dark-border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes shimmer {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+                padding: 4rem 1rem;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .phone-mockup {
+                width: 250px;
+                height: 500px;
+            }
+
+            .story-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+
+            .story-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .features-container,
+            .cta-container {
+                padding: 0 1rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .story-title,
+            .features-title {
+                font-size: 2rem;
+            }
+
+            .cta-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-cta,
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-stats,
+            .cta-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .cta-divider {
+                width: 40px;
+                height: 1px;
+            }
+
+            /* Feedback form mobile adjustments */
+            .feedback-form form > div:first-child {
+                grid-template-columns: 1fr !important;
+            }
+            
+            #bugFields > div:first-child,
+            #bugFields > div:last-child {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading state */
+        .loading {
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <span class="eyebrow">Welcome, rider! 🚴‍♀️</span>
-    <h1>PedalCrew</h1>
-    <div class="tag">Make cycling more social, transparent, and community‑driven</div>
-    <p class="hero">Plan upcoming rides with friends and clubs. No chat chaos, no spreadsheets—just clear routes, easy joins, and a simple way to grow your cycling crew.</p>
-    <div class="badges">
-      <span class="badge">⚡ Built with Flutter + Firebase</span>
-      <span class="badge">🔒 Privacy‑respecting</span>
-      <span class="badge">🥇 Level up as you ride</span>
-    </div>
-    <div class="cta">
-      <!-- Replace GITHUB_RELEASE_APK_URL with your GitHub Releases APK link, e.g., https://github.com/OWNER/REPO/releases/latest/download/app-release.apk -->
-      <a class="btn primary" href="GITHUB_RELEASE_APK_URL" download aria-label="Download PedalCrew Android demo APK">⬇️ Download Android (demo)</a>
-      <a class="btn secondary" href="#inside">👀 See what’s inside</a>
-      <a class="btn ghost" href="#feedback">💬 Share feedback</a>
-      <a class="btn ghost" href="https://bigidevelopment.github.io/PedalCrewWebsite/terms.html" target="_blank" rel="noopener" aria-label="PedalCrew Terms of Service">🔖 Terms</a>
-    </div>
-    <div class="bubble b1"></div>
-    <div class="bubble b2"></div>
-    <div class="bubble b3"></div>
-  </header>
-
-  <div class="cloud">
-    <div class="cloud-inner">
-      <main>
-        <h2 id="inside" class="reveal">Why you’ll love it</h2>
-        <div class="features">
-          <div class="card reveal"><h3>Discover rides</h3><p>Browse upcoming rides with filters and find your pace.</p></div>
-          <div class="card reveal"><h3>One‑tap join</h3><p>Hop in or out instantly. No group chat chaos.</p></div>
-          <div class="card reveal"><h3>Create easily</h3><p>Set route, date, capacity and vibe in seconds.</p></div>
-          <div class="card reveal"><h3>Level up</h3><p>Bronze → Silver → Gold → Carbon. Earn it on the road.</p></div>
+<body class="loading">
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#" class="nav-brand">
+                <img src="logo.svg" alt="PedalCrew" />
+                PedalCrew
+            </a>
+            <div class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#story" class="nav-link">My Story</a>
+                <a href="#feedback" class="nav-link">Feedback</a>
+                <a href="mailto:developmentbigi@gmail.com" class="nav-cta">
+                    Download Beta
+                </a>
+            </div>
         </div>
+    </nav>
 
-        <div class="stats reveal" aria-label="product highlights">
-          <div class="stat"><div class="num">10s</div><div class="lbl">to create a ride</div></div>
-          <div class="stat"><div class="num">1‑tap</div><div class="lbl">join/leave</div></div>
-          <div class="stat"><div class="num">0</div><div class="lbl">chat chaos</div></div>
-          <div class="stat"><div class="num">4 levels</div><div class="lbl">Bronze → Carbon</div></div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    🚀 Join 500+ Beta Testers
+                </div>
+                <h1 class="hero-title">
+                    We connect cyclists with their perfect crew
+                </h1>
+                <p class="hero-subtitle">
+                    Make cycling more social, transparent, and community-driven. No more chat chaos or endless spreadsheets—just pure cycling joy with the people who share your passion.
+                </p>
+                <div class="hero-cta">
+                    <a href="mailto:developmentbigi@gmail.com" class="btn btn-primary pulse">
+                        🚴‍♂️ Try Beta Now
+                    </a>
+                    <a href="#story" class="btn btn-secondary">
+                        My Journey
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">500+</span>
+                        <span class="hero-stat-label">Beta Testers</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">365+</span>
+                        <span class="hero-stat-label">Days Building</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">MVP</span>
+                        <span class="hero-stat-label">Ready to Test</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="phone-header">
+                            PedalCrew
+                        </div>
+                        <div class="phone-content">
+                            <div class="phone-card">
+                                <div class="phone-bar medium"></div>
+                                <div class="phone-bar short"></div>
+                                <div class="phone-bar long"></div>
+                            </div>
+                            <div class="phone-card">
+                                <div class="phone-bar long"></div>
+                                <div class="phone-bar medium"></div>
+                                <div class="phone-bar short"></div>
+                            </div>
+                            <div class="phone-card">
+                                <div class="phone-bar short"></div>
+                                <div class="phone-bar long"></div>
+                                <div class="phone-bar medium"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <section id="install" style="margin-top:24px">
-          <div class="panel">
-            <div class="panel-head">How to install (Android)</div>
-            <div style="padding:16px">
-              <ol>
-                <li>Tap “Download Android (demo)”.</li>
-                <li>If prompted, allow installs from your browser.</li>
-                <li>Open the APK to install.</li>
-              </ol>
-              <p class="note">If blocked: Settings → Security → Install unknown apps → Allow for your browser.</p>
-              <p class="small">Download is hosted on GitHub Releases. By downloading you also agree to GitHub’s terms.</p>
-              <p class="small">iOS: TestFlight will come later. This demo focuses on Android.</p>
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="features-container">
+            <div class="features-header fade-in">
+                <h2 class="features-title">Where can you start?</h2>
+                <p class="features-subtitle">
+                    Discover how PedalCrew transforms the way cyclists connect and ride together.
+                </p>
             </div>
-          </div>
-        </section>
-
-        <section id="about-demo" style="margin-top:24px">
-          <div class="panel">
-            <div class="panel-head">What’s in this demo</div>
-            <div style="padding:16px">
-              <ul>
-                <li>Sign in with Google</li>
-                <li>Browse upcoming rides and filter by basics</li>
-                <li>Create a ride with presets; join/leave from details</li>
-                <li>Simple ranking points (create/join/complete)</li>
-                <li>In‑app activity feed and basic profile</li>
-              </ul>
-              <p class="note">Not yet: push notifications, maps/GPX previews, friends/following, iOS build.</p>
-            </div>
-          </div>
-        </section>
-
-        <section id="how" style="margin-top:24px">
-          <div class="panel reveal">
-            <div class="panel-head">How it works</div>
-            <div style="padding:16px">
-              <div class="timeline">
-                <div class="step"><div class="kicker">1. Create</div><div>Set title, pace, route, and capacity. Add an optional join deadline.</div></div>
-                <div class="step"><div class="kicker">2. Share</div><div>Send the link. Friends join in one tap—no login loops.</div></div>
-                <div class="step"><div class="kicker">3. Ride</div><div>See who’s in, keep updates clear, and mark complete for points.</div></div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="requirements" style="margin-top:24px">
-          <div class="panel">
-            <div class="panel-head">Requirements & known limitations</div>
-            <div style="padding:16px">
-              <ul>
-                <li>Android phone/tablet with a modern OS (recent versions work best)</li>
-                <li>Google account on device for sign‑in</li>
-                <li>Internet connection to load rides and sync actions</li>
-              </ul>
-              <p class="note">If install fails or sign‑in doesn’t work, please tell us your device model and Android version in the feedback.</p>
-            </div>
-          </div>
-        </section>
-
-        <section id="social-proof" style="margin-top:24px">
-          <div class="panel reveal">
-            <div class="panel-head">Why riders are excited</div>
-            <div style="padding:16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
-              <div class="quote">“Finally, rides without endless chat scroll. Joining takes seconds.”</div>
-              <div class="quote">“Perfect for our club—clear capacity, simple rules, and waitlist.”</div>
-              <div class="quote">“Love the points. It actually motivates me to show up.”</div>
-            </div>
-          </div>
-        </section>
-
-        <section id="roadmap" style="margin-top:24px">
-          <div class="panel reveal">
-            <div class="panel-head">Roadmap to MVP</div>
-            <div style="padding:16px">
-              <div class="roadmap">
-                <div>
-                  <div class="kicker">Shipped</div>
-                  <div class="chip done">Google Sign‑In</div>
-                  <div class="chip done">Create & Join rides</div>
-                  <div class="chip done">Ride feed & filters</div>
-                  <div class="chip done">Ranking points</div>
-                  <div class="chip done">Activity feed</div>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🔍</div>
+                    <h3 class="feature-title">Discover Rides</h3>
+                    <p class="feature-description">
+                        Browse upcoming rides with smart filters. Find your perfect pace, distance, and cycling crew in seconds.
+                    </p>
                 </div>
-                <div>
-                  <div class="kicker">Next up</div>
-                  <div class="chip next">Join deadline UX</div>
-                  <div class="chip next">Points history</div>
-                  <div class="chip next">Better notifications</div>
-                  <div class="chip next">Deep links polish</div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">One-Tap Join</h3>
+                    <p class="feature-description">
+                        Hop in or out instantly. No endless group chat scrolling, no complex sign-ups. Just pure simplicity.
+                    </p>
                 </div>
-              </div>
-              <p class="subtle" style="margin-top:8px">Want something else? Tell us below—your feedback shapes the roadmap.</p>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">✨</div>
+                    <h3 class="feature-title">Create Easily</h3>
+                    <p class="feature-description">
+                        Set route, date, capacity and vibe in under 30 seconds. Share with your crew and watch them join.
+                    </p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🏆</div>
+                    <h3 class="feature-title">Level Up</h3>
+                    <p class="feature-description">
+                        Bronze → Silver → Gold → Carbon. Earn points for creating, joining, and completing rides. Make it count!
+                    </p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🚴‍♀️</div>
+                    <h3 class="feature-title">Community-Driven</h3>
+                    <p class="feature-description">
+                        Join weekend warriors, cycling clubs, new riders, and commuters. Everyone has a place in our community.
+                    </p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Mobile First</h3>
+                    <p class="feature-description">
+                        Designed for cyclists on the go. Quick actions, clear interface, and everything you need in your pocket.
+                    </p>
+                </div>
             </div>
-          </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="feedback" style="margin-top:24px">
-          <div class="panel">
-            <div class="panel-head">Tell us what you think</div>
-            <div style="padding:0">
-              <!-- Replace the src with your Google Forms embed link (see README) -->
-              <iframe class="form" src="https://docs.google.com/forms/d/e/1FAIpQLSdgwpK2mvSkd_B462AEX1YrhiJTCrR4UiFvk8uniIulwFP3iQ/viewform?embedded=true" title="Feedback form" loading="lazy"></iframe>
-              <div style="padding:12px 16px; border-top: 2px solid #e2e8f0;">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgwpK2mvSkd_B462AEX1YrhiJTCrR4UiFvk8uniIulwFP3iQ/viewform?usp=dialog" target="_blank" rel="noopener">Open the form in a new tab →</a>
-              </div>
+    <!-- Story Section -->
+    <section id="story" class="story">
+        <div class="story-container">
+            <div class="story-content fade-in">
+                <h2 class="story-title">Built by a cyclist, for cyclists</h2>
+                <p class="story-text">
+                    Hi! I'm a Computer Science student and endurance sports enthusiast. Like you, I love gym sessions, road cycling, and running. But organizing group rides? That was always a mess.
+                </p>
+                <p class="story-text">
+                    After a year of solo development, countless late nights, and way too much coffee, PedalCrew was born. This isn't just another app—it's my solution to the chaos we all know too well.
+                </p>
+                <p class="story-text">
+                    <strong>Your feedback shapes everything.</strong> This is MVP, and every feature request, bug report, and suggestion directly influences the roadmap.
+                </p>
+                <a href="mailto:developmentbigi@gmail.com" class="btn story-cta">
+                    🤝 Join the Journey
+                </a>
             </div>
-          </div>
-        </section>
-
-        <section id="troubleshooting" style="margin-top:24px">
-          <div class="panel">
-            <div class="panel-head">Troubleshooting</div>
-            <div style="padding:16px">
-              <ul>
-                <li>“App not installed”: uninstall older demo versions first and try again</li>
-                <li>Blocked by Play Protect: tap “Install anyway” or open APK from Files app</li>
-                <li>Google sign‑in loop: ensure a Google account is added on device</li>
-                <li>Slow load or empty feed: check network, then pull‑to‑refresh</li>
-              </ul>
-              <p class="note">Still stuck? Email us with screenshots if possible.</p>
+            <div class="story-stats fade-in">
+                <div class="story-stat">
+                    <span class="story-stat-number">365+</span>
+                    <span class="story-stat-label">Days Building</span>
+                </div>
+                <div class="story-stat">
+                    <span class="story-stat-number">500+</span>
+                    <span class="story-stat-label">Beta Testers</span>
+                </div>
+                <div class="story-stat">
+                    <span class="story-stat-number">MVP</span>
+                    <span class="story-stat-label">Status</span>
+                </div>
+                <div class="story-stat">
+                    <span class="story-stat-number">∞</span>
+                    <span class="story-stat-label">Passion</span>
+                </div>
             </div>
-          </div>
-        </section>
+        </div>
+    </section>
 
-        <p class="footer-links"><a href="https://bigidevelopment.github.io/PedalCrewWebsite/terms.html" target="_blank" rel="noopener">Terms</a> · <a href="privacy.html">Privacy Policy</a> · <a href="mailto:developmentbigi@gmail.com">Contact</a> · <a href="GITHUB_RELEASES_PAGE" target="_blank" rel="noopener">GitHub Releases</a></p>
-      </main>
-    </div>
-  </div>
+    <!-- Feedback Section -->
+    <section id="feedback" class="features">
+        <div class="features-container">
+            <div class="features-header fade-in">
+                <h2 class="features-title">Share Your Thoughts</h2>
+                <p class="features-subtitle">
+                    Your feedback directly shapes PedalCrew's future. Every suggestion, bug report, and idea matters.
+                </p>
+            </div>
+            <div style="max-width: 600px; margin: 0 auto;">
+                <div class="feedback-form fade-in">
+                        <form id="feedbackForm" action="https://formspree.io/f/mjkakrjr" method="POST" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                            <!-- Formspree Configuration -->
+                            <input type="hidden" name="_subject" value="New PedalCrew Feedback Submission">
+                            <input type="hidden" name="_next" value="https://your-domain.com/thank-you">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_template" value="table">
+                            
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div>
+                                <label for="name" style="display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.5rem;">Name</label>
+                                <input type="text" id="name" name="name" required style="width: 100%; padding: 0.875rem; border: 1px solid var(--dark-border); border-radius: 12px; background: var(--dark-bg); color: var(--text-primary); font-family: inherit; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary-green)'" onblur="this.style.borderColor='var(--dark-border)'">
+                            </div>
+                            <div>
+                                <label for="email" style="display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.5rem;">Email</label>
+                                <input type="email" id="email" name="email" required style="width: 100%; padding: 0.875rem; border: 1px solid var(--dark-border); border-radius: 12px; background: var(--dark-bg); color: var(--text-primary); font-family: inherit; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary-green)'" onblur="this.style.borderColor='var(--dark-border)'">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="type" style="display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.5rem;">Feedback Type</label>
+                            <select id="type" name="type" required onchange="toggleConditionalFields(this.value)" style="width: 100%; padding: 0.875rem; border: 1px solid var(--dark-border); border-radius: 12px; background: var(--dark-bg); color: var(--text-primary); font-family: inherit; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary-green)'" onblur="this.style.borderColor='var(--dark-border)'">
+                                <option value="">Select feedback type...</option>
+                                <option value="bug">🐛 Bug Report</option>
+                                <option value="feature">💡 Feature Request</option>
+                                <option value="general">💬 General Feedback</option>
+                                <option value="beta">🚀 Beta Testing Interest</option>
+                                <option value="collaboration">🤝 Collaboration</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Bug Report Specific Fields -->
+                        <div id="bugFields" style="display: none; border: 1px solid var(--primary-green); border-radius: 12px; padding: 1.5rem; background: rgba(22, 163, 74, 0.05);">
+                            <h4 style="color: var(--primary-light); margin-bottom: 1rem; font-size: 1rem;">🐛 Bug Report Details</h4>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                                <div>
+                                    <label for="appVersion" style="display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.5rem;">App Version</label>
+                                    <input type="text" id="appVersion" name="appVersion" placeholder="e.g., 1.0.0 (build 23)" style="width: 100%; padding: 0.875rem; border: 1px solid var(--dark-border); border-radius: 12px; background: var(--dark-bg); color: var(--text-primary); font-family: inherit; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary-green)'" onblur="this.style.borderColor='var(--dark-border)'">
+                                </div>
+                                <div>
+                                    <label for="phoneModel" style="display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.5rem;">Phone Model</label>
+                                    <input type="text" id="phoneModel" name="phoneModel" placeholder="e.g., Samsung Galaxy S24" style="width: 100%; padding: 0.875rem; border: 1px solid var(--dark-border); border-radius: 12px; background: var(--dark-bg); color: var(--text-primary); font-family: inherit; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary-green)'" onblur="this.style.borderColor='var(--dark-border)'">
+                                </div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div>
+                                    <label for="androidVersion" style="display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.5rem;">Android Version</label>
+                                    <input type="text" id="androidVersion" name="androidVersion" placeholder="e.g., Android 14" style="width: 100%; padding: 0.875rem; border: 1px solid var(--dark-border); border-radius: 12px; background: var(--dark-bg); color: var(--text-primary); font-family: inherit; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary-green)'" onblur="this.style.borderColor='var(--dark-border)'">
+                                </div>
+                                <div>
+                                    <label for="frequency" style="display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.5rem;">How Often?</label>
+                                    <select id="frequency" name="frequency" style="width: 100%; padding: 0.875rem; border: 1px solid var(--dark-border); border-radius: 12px; background: var(--dark-bg); color: var(--text-primary); font-family: inherit; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary-green)'" onblur="this.style.borderColor='var(--dark-border)'">
+                                        <option value="">Select frequency...</option>
+                                        <option value="always">Always happens</option>
+                                        <option value="often">Happens often</option>
+                                        <option value="sometimes">Sometimes</option>
+                                        <option value="once">Happened once</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 
-  <footer>© 2025 PedalCrew</footer>
+                        <!-- Feature Request Specific Fields -->
+                        <div id="featureFields" style="display: none; border: 1px solid var(--primary-green); border-radius: 12px; padding: 1.5rem; background: rgba(22, 163, 74, 0.05);">
+                            <h4 style="color: var(--primary-light); margin-bottom: 1rem; font-size: 1rem;">💡 Feature Request Details</h4>
+                            <div>
+                                <label for="priority" style="display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.5rem;">Priority Level</label>
+                                <select id="priority" name="priority" style="width: 100%; padding: 0.875rem; border: 1px solid var(--dark-border); border-radius: 12px; background: var(--dark-bg); color: var(--text-primary); font-family: inherit; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary-green)'" onblur="this.style.borderColor='var(--dark-border)'">
+                                    <option value="">How important is this?</option>
+                                    <option value="critical">🔥 Critical - App is unusable without this</option>
+                                    <option value="high">🚀 High - Would greatly improve experience</option>
+                                    <option value="medium">⭐ Medium - Nice to have</option>
+                                    <option value="low">💭 Low - Just an idea</option>
+                                </select>
+                            </div>
+                        </div>
 
-  <script>
-    (function() {
-      var els = [].slice.call(document.querySelectorAll('.reveal'));
-      if (!('IntersectionObserver' in window) || els.length === 0) {
-        els.forEach(function(el){ el.classList.add('visible'); });
-        return;
-      }
-      var io = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry){ if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); } });
-      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
-      els.forEach(function(el){ io.observe(el); });
-    })();
-  </script>
+                        <!-- Beta Testing Specific Fields -->
+                        <div id="betaFields" style="display: none; border: 1px solid var(--primary-green); border-radius: 12px; padding: 1.5rem; background: rgba(22, 163, 74, 0.05);">
+                            <h4 style="color: var(--primary-light); margin-bottom: 1rem; font-size: 1rem;">🚀 Beta Testing Interest</h4>
+                            <div>
+                                <label for="experience" style="display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.5rem;">Cycling Experience</label>
+                                <select id="experience" name="experience" style="width: 100%; padding: 0.875rem; border: 1px solid var(--dark-border); border-radius: 12px; background: var(--dark-bg); color: var(--text-primary); font-family: inherit; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary-green)'" onblur="this.style.borderColor='var(--dark-border)'">
+                                    <option value="">Your cycling background?</option>
+                                    <option value="beginner">🚴‍♀️ New to cycling</option>
+                                    <option value="casual">🌟 Casual rider</option>
+                                    <option value="regular">🏃‍♂️ Regular cyclist</option>
+                                    <option value="enthusiast">🔥 Cycling enthusiast</option>
+                                    <option value="competitive">🏆 Competitive cyclist</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="message" style="display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.5rem;">Your Message</label>
+                            <textarea id="message" name="message" required rows="5" placeholder="Tell me about your experience, ideas, or what you'd like to see in PedalCrew..." style="width: 100%; padding: 0.875rem; border: 1px solid var(--dark-border); border-radius: 12px; background: var(--dark-bg); color: var(--text-primary); font-family: inherit; resize: vertical; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary-green)'" onblur="this.style.borderColor='var(--dark-border)'"></textarea>
+                        </div>
+                        
+                        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                            <button type="submit" class="btn btn-primary">
+                                📩 Send Feedback
+                            </button>
+                            <p style="color: var(--text-muted); font-size: 0.875rem; margin: 0; flex-basis: 100%;">
+                                Your feedback will be sent directly to the developer
+                            </p>
+                        </div>
+                    </form>
+                    <div id="feedbackSuccess" style="display: none; text-align: center; padding: 2rem; color: var(--primary-light);">
+                        <div style="font-size: 2rem; margin-bottom: 1rem;">✅</div>
+                        <h3 style="color: var(--primary-light); margin-bottom: 0.5rem;">Thank you!</h3>
+                        <p style="color: var(--text-secondary);">Your feedback has been sent successfully. I'll get back to you soon!</p>
+                        <button id="sendAnother" class="btn btn-secondary" style="margin-top: 1rem;">
+                            🔄 Send Another Feedback
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="beta" class="cta-section">
+        <div class="cta-container">
+            <h2 class="cta-title fade-in">Be notified when we launch!</h2>
+            <p class="cta-subtitle fade-in">
+                Join 500+ early adopters testing PedalCrew. Your feedback shapes the future of cycling communities.
+            </p>
+            <div class="cta-buttons fade-in">
+                <a href="mailto:developmentbigi@gmail.com" class="btn btn-primary">
+                    ✉️ Email Me Directly
+                </a>
+                <a href="#feedback" class="btn btn-secondary">
+                    💬 Give Feedback
+                </a>
+            </div>
+            <div class="cta-stats fade-in">
+                <div class="cta-stat">
+                    <div class="cta-stat-number">500+</div>
+                    <div class="cta-stat-label">Beta testers</div>
+                </div>
+                <div class="cta-divider"></div>
+                <div class="cta-stat">
+                    <div class="cta-stat-number">MVP</div>
+                    <div class="cta-stat-label">Ready to test</div>
+                </div>
+                <div class="cta-divider"></div>
+                <div class="cta-stat">
+                    <div class="cta-stat-number">365+</div>
+                    <div class="cta-stat-label">Days building</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 PedalCrew. Built with ❤️ by a cycling enthusiast.</p>
+        <div style="margin-top: 1rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+            <a href="terms.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s ease;" onmouseover="this.style.color='var(--primary-light)'" onmouseout="this.style.color='var(--text-muted)'">Terms of Service</a>
+            <a href="privacy.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s ease;" onmouseover="this.style.color='var(--primary-light)'" onmouseout="this.style.color='var(--text-muted)'">Privacy Policy</a>
+            <a href="mailto:developmentbigi@gmail.com" style="color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s ease;" onmouseover="this.style.color='var(--primary-light)'" onmouseout="this.style.color='var(--text-muted)'">Contact</a>
+        </div>
+    </footer>
+
+    <script>
+        // Loading animation
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.remove('loading');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navigation scroll effect
+        let lastScroll = 0;
+        const nav = document.querySelector('.nav');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                nav.style.background = 'rgba(10, 10, 10, 0.95)';
+            } else {
+                nav.style.background = 'rgba(10, 10, 10, 0.8)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Add some interactive elements
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Phone mockup content animation
+        function animatePhoneContent() {
+            const cards = document.querySelectorAll('.phone-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.transform = 'translateY(-5px)';
+                    setTimeout(() => {
+                        card.style.transform = 'translateY(0)';
+                    }, 200);
+                }, index * 300);
+            });
+        }
+
+        // Start phone animation
+        setInterval(animatePhoneContent, 4000);
+
+        // Add cursor trail effect (subtle)
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Performance optimized scroll handler
+        let ticking = false;
+
+        function updateScrollEffects() {
+            // Add any scroll-based effects here
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateScrollEffects);
+                ticking = true;
+            }
+        });
+
+        // Toggle conditional fields based on feedback type
+        function toggleConditionalFields(type) {
+            // Hide all conditional fields first
+            document.getElementById('bugFields').style.display = 'none';
+            document.getElementById('featureFields').style.display = 'none';
+            document.getElementById('betaFields').style.display = 'none';
+            
+            // Show relevant fields based on type
+            if (type === 'bug') {
+                document.getElementById('bugFields').style.display = 'block';
+            } else if (type === 'feature') {
+                document.getElementById('featureFields').style.display = 'block';
+            } else if (type === 'beta') {
+                document.getElementById('betaFields').style.display = 'block';
+            }
+        }
+
+        // Formspree form handling
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            // Don't prevent default - let Formspree handle the submission
+            // But we'll enhance it with our conditional field formatting
+            
+            const formData = new FormData(this);
+            const type = formData.get('type');
+            
+            // Add formatted details as a hidden field for better email formatting
+            let formattedDetails = '';
+            
+            if (type === 'bug') {
+                const appVersion = formData.get('appVersion');
+                const phoneModel = formData.get('phoneModel');
+                const androidVersion = formData.get('androidVersion');
+                const frequency = formData.get('frequency');
+                
+                formattedDetails = `🐛 BUG REPORT DETAILS:\n`;
+                formattedDetails += `App Version: ${appVersion || 'Not specified'}\n`;
+                formattedDetails += `Phone Model: ${phoneModel || 'Not specified'}\n`;
+                formattedDetails += `Android Version: ${androidVersion || 'Not specified'}\n`;
+                formattedDetails += `Frequency: ${frequency || 'Not specified'}\n\n`;
+            } else if (type === 'feature') {
+                const priority = formData.get('priority');
+                formattedDetails = `💡 FEATURE REQUEST DETAILS:\n`;
+                formattedDetails += `Priority Level: ${priority || 'Not specified'}\n\n`;
+            } else if (type === 'beta') {
+                const experience = formData.get('experience');
+                formattedDetails = `🚀 BETA TESTING DETAILS:\n`;
+                formattedDetails += `Cycling Experience: ${experience || 'Not specified'}\n\n`;
+            }
+            
+            // Add the formatted details as a hidden field
+            if (formattedDetails) {
+                const hiddenField = document.createElement('input');
+                hiddenField.type = 'hidden';
+                hiddenField.name = 'formatted_details';
+                hiddenField.value = formattedDetails;
+                this.appendChild(hiddenField);
+            }
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '⏳ Sending...';
+            submitBtn.disabled = true;
+            
+            // Handle successful submission (Formspree redirects by default)
+            // We'll use a timeout to show success message if no redirect happens
+            setTimeout(() => {
+                showFeedbackSuccess();
+            }, 1000);
+        });
+
+        // Show success message
+        function showFeedbackSuccess() {
+            document.getElementById('feedbackForm').style.display = 'none';
+            document.getElementById('feedbackSuccess').style.display = 'block';
+        }
+
+        // Send another feedback functionality
+        document.getElementById('sendAnother').addEventListener('click', function() {
+            document.getElementById('feedbackForm').style.display = 'flex';
+            document.getElementById('feedbackSuccess').style.display = 'none';
+            document.getElementById('feedbackForm').reset();
+            toggleConditionalFields(''); // Hide conditional fields
+            
+            // Reset submit button
+            const submitBtn = document.querySelector('#feedbackForm button[type="submit"]');
+            submitBtn.innerHTML = '📩 Send Feedback';
+            submitBtn.disabled = false;
+        });
+    </script>
 </body>
 </html>
-
-

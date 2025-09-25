@@ -1,58 +1,272 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Terms of Service – PedalCrew</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="description" content="Terms of Service for the PedalCrew demo and website.">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
-  <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 24px; color: #0b172a; line-height: 1.6; }
-    h1 { margin: 0 0 8px; }
-    a { color: #2563eb; }
-    @media (prefers-color-scheme: dark) { body { color: #e5e7eb; background: #0b172a; } }
-  </style>
+    <meta charset="utf-8">
+    <title>Terms of Service – PedalCrew</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Terms of Service for the PedalCrew demo and website.">
+    <meta name="theme-color" content="#16a34a">
+    <link rel="icon" href="logo.svg" type="image/svg+xml"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-green: #16a34a;
+            --primary-dark: #15803d;
+            --primary-light: #22c55e;
+            --accent-green: #dcfce7;
+            --dark-bg: #0a0a0a;
+            --dark-surface: #111111;
+            --dark-border: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --gradient-primary: linear-gradient(135deg, #16a34a 0%, #059669 50%, #047857 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--dark-border);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .nav-brand img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-light);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--primary-light);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .last-updated {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 2rem 0 1rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        ul, ol {
+            color: var(--text-secondary);
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: var(--primary-light);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--primary-green);
+            text-decoration: underline;
+        }
+
+        strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .content-section {
+            background: var(--dark-surface);
+            border: 1px solid var(--dark-border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 6rem 1rem 2rem;
+            }
+
+            .nav-container {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .content-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Terms of Service</h1>
-  <p>Last updated: 2025‑09‑24</p>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <img src="logo.svg" alt="PedalCrew" />
+                PedalCrew
+            </a>
+            <div class="nav-links">
+                <a href="index.html#features" class="nav-link">Features</a>
+                <a href="index.html#story" class="nav-link">My Story</a>
+                <a href="index.html#beta" class="nav-link">Join Beta</a>
+                <a href="mailto:developmentbigi@gmail.com" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
 
-  <p>Welcome to PedalCrew. These Terms govern your use of the PedalCrew mobile app and this website. By using PedalCrew, you agree to these Terms.</p>
+    <div class="container">
+        <a href="index.html" class="back-link">
+            ← Back to home
+        </a>
+        
+        <h1>Terms of Service</h1>
+        <p class="last-updated">Last updated: 2025‑09‑24</p>
 
-  <h2>Demo scope</h2>
-  <p>PedalCrew is currently in a limited demo/testing phase. Features, data models, and availability may change at any time without notice.</p>
+        <div class="content-section">
+            <p>Welcome to PedalCrew. These Terms govern your use of the PedalCrew mobile app and this website. By using PedalCrew, you agree to these Terms.</p>
 
-  <h2>Accounts</h2>
-  <p>You must use your own Google account. You are responsible for safeguarding your account and activity taken under it.</p>
+            <h2>Demo scope</h2>
+            <p>PedalCrew is currently in a limited demo/testing phase. Features, data models, and availability may change at any time without notice.</p>
 
-  <h2>Acceptable use</h2>
-  <ul>
-    <li>Do not violate any law or the rights of others.</li>
-    <li>Do not harass, abuse, or harm others or organize unsafe activities.</li>
-    <li>Do not upload malware or content you don’t have rights to share.</li>
-  </ul>
+            <h2>Accounts</h2>
+            <p>You must use your own Google account. You are responsible for safeguarding your account and activity taken under it.</p>
 
-  <h2>User content</h2>
-  <p>You retain ownership of the content you post (e.g., ride titles/descriptions). You grant us a non‑exclusive license to host and display it as needed to operate the service.</p>
+            <h2>Acceptable use</h2>
+            <ul>
+                <li>Do not violate any law or the rights of others.</li>
+                <li>Do not harass, abuse, or harm others or organize unsafe activities.</li>
+                <li>Do not upload malware or content you don't have rights to share.</li>
+            </ul>
 
-  <h2>Third‑party services</h2>
-  <p>The app uses third‑party services such as Firebase (Auth, Firestore, Storage, Crashlytics, optional Analytics). Their terms and policies apply as relevant.</p>
+            <h2>User content</h2>
+            <p>You retain ownership of the content you post (e.g., ride titles/descriptions). You grant us a non‑exclusive license to host and display it as needed to operate the service.</p>
 
-  <h2>No warranties</h2>
-  <p>The app and website are provided “as is” without warranties of any kind. Use at your own risk, particularly for group rides and outdoor activities.</p>
+            <h2>Third‑party services</h2>
+            <p>The app uses third‑party services such as Firebase (Auth, Firestore, Storage, Crashlytics, optional Analytics). Their terms and policies apply as relevant.</p>
 
-  <h2>Limitation of liability</h2>
-  <p>To the maximum extent permitted by law, PedalCrew and its contributors are not liable for any indirect, incidental, consequential, special, or exemplary damages, or for any loss of data, opportunities, profits, or reputation.</p>
+            <h2>No warranties</h2>
+            <p>The app and website are provided "as is" without warranties of any kind. Use at your own risk, particularly for group rides and outdoor activities.</p>
 
-  <h2>Termination</h2>
-  <p>We may suspend or terminate access to the app or remove content at any time, particularly in case of violations of these Terms.</p>
+            <h2>Limitation of liability</h2>
+            <p>To the maximum extent permitted by law, PedalCrew and its contributors are not liable for any indirect, incidental, consequential, special, or exemplary damages, or for any loss of data, opportunities, profits, or reputation.</p>
 
-  <h2>Changes</h2>
-  <p>We may update these Terms as the demo evolves. Changes will be posted here with an updated date.</p>
+            <h2>Termination</h2>
+            <p>We may suspend or terminate access to the app or remove content at any time, particularly in case of violations of these Terms.</p>
 
-  <h2>Contact</h2>
-  <p>Questions? Contact us at <a href="mailto:developmentbigi@gmail.com">developmentbigi@gmail.com</a>.</p>
+            <h2>Changes</h2>
+            <p>We may update these Terms as the demo evolves. Changes will be posted here with an updated date.</p>
 
-  <p><a href="index.html">← Back to home</a></p>
+            <h2>Contact</h2>
+            <p>Questions? Contact us at <a href="mailto:developmentbigi@gmail.com">developmentbigi@gmail.com</a>.</p>
+        </div>
+    </div>
 </body>
 </html>
