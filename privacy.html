@@ -1,293 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Privacy Policy – PedalCrew</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="Privacy policy for the PedalCrew demo and website.">
-    <meta name="theme-color" content="#16a34a">
-    <link rel="icon" href="logo.svg" type="image/svg+xml"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Privacy policy for the PedalCrew mobile app and website.">
+    <meta name="theme-color" content="#1B5E20">
+    <link rel="icon" href="logo.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary-green: #16a34a;
-            --primary-dark: #15803d;
-            --primary-light: #22c55e;
-            --accent-green: #dcfce7;
-            --dark-bg: #0a0a0a;
-            --dark-surface: #111111;
-            --dark-border: #1a1a1a;
-            --text-primary: #ffffff;
-            --text-secondary: #a1a1aa;
-            --text-muted: #71717a;
-            --gradient-primary: linear-gradient(135deg, #16a34a 0%, #059669 50%, #047857 100%);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--dark-border);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem 2rem;
-        }
-
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-weight: 800;
-            font-size: 1.25rem;
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-
-        .nav-brand img {
-            width: 32px;
-            height: 32px;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-
-        .nav-link:hover {
-            color: var(--primary-light);
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 8rem 2rem 4rem;
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            margin-bottom: 2rem;
-            transition: color 0.2s ease;
-        }
-
-        .back-link:hover {
-            color: var(--primary-light);
-        }
-
-        h1 {
-            font-size: 3rem;
-            font-weight: 900;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-green) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .last-updated {
-            color: var(--text-muted);
-            font-size: 0.875rem;
-            margin-bottom: 2rem;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin: 2rem 0 1rem;
-        }
-
-        h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: 1.5rem 0 0.75rem;
-        }
-
-        p {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
-
-        ul, ol {
-            color: var(--text-secondary);
-            margin: 1rem 0;
-            padding-left: 1.5rem;
-        }
-
-        li {
-            margin-bottom: 0.5rem;
-        }
-
-        a {
-            color: var(--primary-light);
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-
-        a:hover {
-            color: var(--primary-green);
-            text-decoration: underline;
-        }
-
-        strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        em {
-            color: var(--primary-light);
-            font-style: normal;
-            font-weight: 500;
-        }
-
-        .content-section {
-            background: var(--dark-surface);
-            border: 1px solid var(--dark-border);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 6rem 1rem 2rem;
-            }
-
-            .nav-container {
-                padding: 1rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .content-section {
-                padding: 1.5rem;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/legal.css">
 </head>
+
 <body>
+
     <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-container">
-            <a href="index.html" class="nav-brand">
-                <img src="logo.svg" alt="PedalCrew" />
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <img src="logo.svg" alt="PedalCrew Logo">
                 PedalCrew
             </a>
-            <div class="nav-links">
-                <a href="index.html#features" class="nav-link">Features</a>
-                <a href="index.html#story" class="nav-link">My Story</a>
-                <a href="index.html#beta" class="nav-link">Join Beta</a>
-                <a href="mailto:developmentbigi@gmail.com" class="nav-link">Contact</a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html#features">Features</a>
+                <a href="index.html#faq">FAQ</a>
+                <a href="mailto:developmentbigi@gmail.com">Contact</a>
             </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
-    <div class="container">
-        <a href="index.html" class="back-link">
-            ← Back to home
-        </a>
-        
-        <h1>Privacy Policy</h1>
-        <p class="last-updated">Last updated: 2025‑09‑24</p>
+    <div class="legal-page">
+        <div class="legal-container">
+            <a href="index.html" class="legal-back">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6" />
+                </svg>
+                Back to home
+            </a>
 
-        <div class="content-section">
-            <p>PedalCrew is currently in a limited demo/testing phase. This website is a simple static page that does not use cookies or track you. We do not collect personal data on this website.</p>
+            <h1 class="legal-title">Privacy Policy</h1>
+            <p class="legal-updated">Last updated: 2026‑01‑28</p>
 
-            <h2>Mobile app</h2>
-            <p>The PedalCrew Android app connects to third‑party services to provide core features. These include Firebase services such as Authentication, Firestore (database), Storage (for route files and avatars), Crashlytics (crash reporting), and optionally Analytics (only if you consent in settings). Your usage of the app is subject to the privacy policies of those providers.</p>
+            <div class="legal-content">
+                <p>PedalCrew ("we", "us", "our") is committed to protecting your privacy. This Privacy Policy explains
+                    how we collect, use, and protect your personal data when you use the PedalCrew mobile application.
+                </p>
 
-            <h3>What we collect in the app</h3>
-            <ul>
-                <li><strong>Account basics</strong>: your Google account UID, email, display name, and optional photo URL.</li>
-                <li><strong>Profile fields you provide</strong>: preferred pace, home city, analytics consent, notification preferences.</li>
-                <li><strong>Ride data</strong>: rides you create or join, participants, statuses, and activity feed entries.</li>
-                <li><strong>Points and ranks</strong>: totals and individual <em>PointsTransactions</em> for create/join/complete actions.</li>
-                <li><strong>Route files (optional)</strong>: GPX files you choose to upload to show a course preview; we parse distance/elevation and store the file in Firebase Storage.</li>
-                <li><strong>Crash reports</strong>: if enabled, anonymized crash and performance data to improve stability.</li>
-                <li><strong>Analytics (optional)</strong>: if you opt in, anonymous usage events such as login, ride create/join/leave/complete, filter apply, share, etc.</li>
-            </ul>
+                <div class="highlight-box">
+                    <p><strong>GDPR Compliance:</strong> If you are located in the European Union, you have specific
+                        rights regarding your personal data under the General Data Protection Regulation (GDPR).</p>
+                </div>
 
-            <h3>Permissions</h3>
-            <ul>
-                <li><strong>Location (optional)</strong>: if you choose "Use my location" when creating a ride, the app requests location to set a start point. Location data is not tracked in the background.</li>
-                <li><strong>File access (optional)</strong>: when you import a GPX file, the app requests access to the selected file to upload it to Firebase Storage and compute distance/elevation.</li>
-                <li><strong>Network & Google Sign‑In</strong>: required for core functionality.</li>
-            </ul>
+                <h2>Data Controller</h2>
+                <p>The data controller responsible for your personal data is:</p>
+                <p><strong>BiGi Development</strong><br>
+                    Email: <a href="mailto:developmentbigi@gmail.com">developmentbigi@gmail.com</a><br>
+                    Location: Slovenia, European Union</p>
 
-            <h3>How we use your data</h3>
-            <ul>
-                <li>To authenticate you and keep your account in sync across sessions.</li>
-                <li>To show, create, and manage rides and participation.</li>
-                <li>To compute points and rank levels, including per‑action PointsTransactions.</li>
-                <li>To improve app quality via crash reports and, if enabled, analytics.</li>
-            </ul>
+                <h2>What Data We Collect</h2>
 
-            <h3>Data retention</h3>
-            <p>Profile and ride data remains in the database until deleted. You can request account deletion at any time (Settings → Delete account in‑app, or email us). Crash and analytics data follow the retention policies of the underlying providers. Uploaded GPX files remain in Firebase Storage until deleted with the associated ride or by request.</p>
+                <h3>Account Information</h3>
+                <ul>
+                    <li><strong>Google Account Data:</strong> When you sign in with Google, we receive your unique user
+                        ID (UID), email address, display name, and profile photo URL.</li>
+                    <li><strong>Profile Information:</strong> Preferred cycling pace, home city (optional).</li>
+                </ul>
 
-            <h3>Your choices</h3>
-            <ul>
-                <li>Use the in‑app toggle to opt in/out of analytics at any time.</li>
-                <li>Request account deletion and associated data removal.</li>
-                <li>Do not grant optional permissions (location, file access) if you prefer.</li>
-                <li>Contact us with any privacy questions.</li>
-            </ul>
+                <h3>Usage Data</h3>
+                <ul>
+                    <li><strong>Ride Data:</strong> Rides you create or join, including title, description, date/time,
+                        meeting location coordinates, route information, and participant lists.</li>
+                    <li><strong>Activity & Statistics:</strong> Points earned, badges, ride history, and participation
+                        records.</li>
+                    <li><strong>Comments & Feedback:</strong> Any comments you post on rides or feedback you submit.
+                    </li>
+                </ul>
 
-            <h3>Children's privacy</h3>
-            <p>This demo is not intended for children under 13. If you believe a child has provided information, contact us to remove it.</p>
+                <h3>Location Data</h3>
+                <ul>
+                    <li><strong>Meeting Points:</strong> When you create a ride or Quick Beacon, you may share your
+                        location to set a meeting point. This location is stored with the ride.</li>
+                    <li><strong>No Background Tracking:</strong> We do not track your location in the background.
+                        Location is only accessed when you actively use location-based features.</li>
+                </ul>
 
-            <h3>Changes</h3>
-            <p>We may update this policy as the demo evolves. Material changes will be reflected by updating the date above.</p>
+                <h3>Technical Data</h3>
+                <ul>
+                    <li><strong>Crash Reports:</strong> If the app crashes, anonymized diagnostic data is sent to
+                        Firebase Crashlytics to help us improve stability.</li>
+                    <li><strong>Analytics (Optional):</strong> If you opt in during onboarding, anonymous usage events
+                        (e.g., screen views, feature usage) are collected via Firebase Analytics. <strong>Analytics is
+                            disabled by default.</strong></li>
+                    <li><strong>Push Notification Tokens:</strong> Device tokens for sending push notifications about
+                        ride updates.</li>
+                </ul>
 
-            <h2>Contact</h2>
-            <p>If you have questions or requests, contact us at <a href="mailto:developmentbigi@gmail.com">developmentbigi@gmail.com</a>.</p>
+                <h2>How We Use Your Data</h2>
+                <ul>
+                    <li>To provide and operate the PedalCrew service.</li>
+                    <li>To authenticate your account and maintain your session.</li>
+                    <li>To display rides, participants, and activity feeds.</li>
+                    <li>To send notifications about rides you've joined or created.</li>
+                    <li>To improve app stability and fix bugs (via crash reports).</li>
+                    <li>To understand usage patterns and improve features (if analytics enabled).</li>
+                </ul>
+
+                <h2>Legal Basis for Processing (GDPR)</h2>
+                <ul>
+                    <li><strong>Contract:</strong> Processing necessary to provide the PedalCrew service you requested.
+                    </li>
+                    <li><strong>Consent:</strong> Analytics data collection (opt-in only).</li>
+                    <li><strong>Legitimate Interests:</strong> Crash reporting for app stability and security.</li>
+                </ul>
+
+                <h2>Data Sharing & Third Parties</h2>
+                <p>We use the following third-party services to operate PedalCrew:</p>
+                <ul>
+                    <li><strong>Google Firebase:</strong> Authentication, database (Firestore), file storage, push
+                        notifications (FCM), crash reporting (Crashlytics), and optional analytics.</li>
+                    <li><strong>Google Sign-In:</strong> For account authentication.</li>
+                    <li><strong>OpenStreetMap:</strong> For displaying maps (tile requests made directly from your
+                        device).</li>
+                </ul>
+                <p>We do not sell your personal data to third parties. We do not share your data with advertisers.</p>
+
+                <h2>Data Retention</h2>
+                <ul>
+                    <li><strong>Active Accounts:</strong> Your data is retained as long as your account is active.</li>
+                    <li><strong>Inactive Accounts:</strong> If your account is inactive for <strong>2 years</strong>, we
+                        will send you an email notification. If you do not respond within 30 days, your account and
+                        personal data will be deleted.</li>
+                    <li><strong>Deleted Accounts:</strong> When you delete your account, your personal data is removed
+                        immediately. Some data may be retained in backups for up to 30 days.</li>
+                    <li><strong>Crash & Analytics Data:</strong> Follows Firebase retention policies (typically 90 days
+                        to 14 months).</li>
+                </ul>
+
+                <h2>Your Rights (GDPR)</h2>
+                <p>If you are in the European Union, you have the following rights:</p>
+                <ul>
+                    <li><strong>Access:</strong> Request a copy of your personal data.</li>
+                    <li><strong>Rectification:</strong> Correct inaccurate personal data.</li>
+                    <li><strong>Erasure:</strong> Delete your account and associated data (Settings → Delete account).
+                    </li>
+                    <li><strong>Restriction:</strong> Request limiting how we use your data.</li>
+                    <li><strong>Portability:</strong> Receive your data in a structured format.</li>
+                    <li><strong>Object:</strong> Object to processing based on legitimate interests.</li>
+                    <li><strong>Withdraw Consent:</strong> Disable analytics at any time in Settings.</li>
+                </ul>
+                <p>To exercise these rights, contact us at <a
+                        href="mailto:developmentbigi@gmail.com">developmentbigi@gmail.com</a>.</p>
+
+                <h2>Your Choices</h2>
+                <ul>
+                    <li><strong>Analytics:</strong> Opt in or out during onboarding or anytime in Settings.</li>
+                    <li><strong>Location:</strong> Grant or revoke location permission in your device settings.</li>
+                    <li><strong>Notifications:</strong> Enable or disable push notifications in Settings.</li>
+                    <li><strong>Account Deletion:</strong> Delete your account and all associated data anytime via
+                        Settings → Delete account.</li>
+                </ul>
+
+                <h2>Data Security</h2>
+                <p>We use industry-standard security measures including:</p>
+                <ul>
+                    <li>Encrypted data transmission (HTTPS/TLS).</li>
+                    <li>Firebase Security Rules to control data access.</li>
+                    <li>Secure authentication via Google Sign-In.</li>
+                </ul>
+
+                <h2>Children's Privacy</h2>
+                <p>PedalCrew is not intended for children under 16 years of age. We do not knowingly collect personal
+                    data from children. If you believe a child has provided personal data, contact us to have it
+                    removed.</p>
+
+                <h2>International Transfers</h2>
+                <p>Your data is processed by Firebase services which may store data in data centers outside the European
+                    Union. Google Firebase complies with GDPR requirements for international data transfers.</p>
+
+                <h2>Changes to This Policy</h2>
+                <p>We may update this Privacy Policy from time to time. Significant changes will be communicated through
+                    the app or email. The "Last updated" date above reflects the most recent version.</p>
+
+                <h2>Contact Us</h2>
+                <p>If you have questions about this Privacy Policy or wish to exercise your rights, contact us at:</p>
+                <p><a href="mailto:developmentbigi@gmail.com">developmentbigi@gmail.com</a></p>
+            </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-blob footer-blob--1"></div>
+        <div class="footer-blob footer-blob--2"></div>
+        <div class="footer-content container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">
+                        PedalCrew
+                    </div>
+                    <p class="footer-desc">Making cycling social. Find your crew, organize rides, and hit the road
+                        together.</p>
+                </div>
+                <div>
+                    <h4>Product</h4>
+                    <div class="footer-links">
+                        <a href="index.html#features">Features</a>
+                        <a href="index.html#faq">FAQ</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Legal</h4>
+                    <div class="footer-links">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                        <a href="mailto:developmentbigi@gmail.com">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="footer-bottom">
+                <span>&copy; 2026 PedalCrew. All rights reserved.</span>
+                <span>Made with 🚴 in Slovenia</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (navToggle && navLinks) {
+            navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+            navLinks.querySelectorAll('a').forEach(link =>
+                link.addEventListener('click', () => navLinks.classList.remove('open'))
+            );
+        }
+        // Navbar scroll shadow
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 20);
+        }, { passive: true });
+    </script>
 </body>
+
 </html>

@@ -1,1902 +1,616 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <title>PedalCrew – Make Cycling Social</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="Make cycling more social, transparent, and community-driven. Join the beta and help shape the future of group rides.">
-    <meta name="theme-color" content="#16a34a">
-    <meta property="og:title" content="PedalCrew – Make Cycling Social">
-    <meta property="og:description" content="Make cycling more social, transparent, and community‑driven. Join the beta and help shape the future of group rides.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="favicon.svg">
-    <meta property="og:site_name" content="PedalCrew">
-    <meta property="og:locale" content="en_US">
-    <link rel="icon" href="logo.svg" type="image/svg+xml"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PedalCrew — Your Next Ride is One Tap Away</title>
+    <meta name="description"
+        content="Find cycling buddies, organize group rides, and hit the road together. PedalCrew makes cycling social.">
+    <meta name="theme-color" content="#1B5E20">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary-green: #16a34a;
-            --primary-dark: #15803d;
-            --primary-light: #22c55e;
-            --accent-green: #dcfce7;
-            --dark-bg: #0a0a0a;
-            --dark-surface: #111111;
-            --dark-border: #1a1a1a;
-            --text-primary: #ffffff;
-            --text-secondary: #a1a1aa;
-            --text-muted: #71717a;
-            --gradient-primary: linear-gradient(135deg, #16a34a 0%, #059669 50%, #047857 100%);
-            --gradient-hero: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #111111 100%);
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-            --shadow-glow: 0 0 40px rgba(22, 163, 74, 0.3);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Navigation */
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--dark-border);
-            transition: all 0.3s ease;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem 2rem;
-        }
-
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-weight: 800;
-            font-size: 1.25rem;
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-
-        .nav-brand img {
-            width: 32px;
-            height: 32px;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-
-        .nav-link:hover {
-            color: var(--primary-light);
-        }
-
-        .nav-cta {
-            background: var(--gradient-primary);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.875rem;
-            transition: all 0.2s ease;
-            box-shadow: var(--shadow-md);
-        }
-
-        .nav-cta:hover {
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            background: var(--gradient-hero);
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(22, 163, 74, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 50%, rgba(5, 150, 105, 0.08) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .hero-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-content {
-            animation: slideInLeft 0.8s ease-out;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(22, 163, 74, 0.1);
-            border: 1px solid rgba(22, 163, 74, 0.2);
-            color: var(--primary-light);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-primary {
-            background: var(--gradient-primary);
-            color: white;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-xl), var(--shadow-glow);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-primary);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-1px);
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .hero-stat {
-            text-align: center;
-        }
-
-        .hero-stat-number {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary-light);
-            display: block;
-        }
-
-        .hero-stat-label {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-        }
-
-        /* Hero Visual */
-        .hero-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: slideInRight 0.8s ease-out;
-        }
-
-        .phone-mockup {
-            position: relative;
-            width: 300px;
-            height: 600px;
-            background: linear-gradient(145deg, #1a1a1a, #111111);
-            border-radius: 40px;
-            padding: 8px;
-            box-shadow: var(--shadow-xl);
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .phone-screen {
-            width: 100%;
-            height: 100%;
-            background: var(--dark-bg);
-            border-radius: 32px;
-            overflow: hidden;
-            position: relative;
-            border: 1px solid var(--dark-border);
-        }
-
-        .phone-header {
-            height: 60px;
-            background: var(--gradient-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .phone-content {
-            padding: 1rem;
-            height: calc(100% - 60px);
-            overflow: hidden;
-        }
-
-        .phone-card {
-            background: var(--dark-surface);
-            border: 1px solid var(--dark-border);
-            border-radius: 16px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            animation: shimmer 2s ease-in-out infinite;
-        }
-
-        .phone-bar {
-            height: 12px;
-            background: var(--text-muted);
-            border-radius: 6px;
-            margin-bottom: 8px;
-            opacity: 0.3;
-        }
-
-        .phone-bar.short { width: 60%; }
-        .phone-bar.medium { width: 80%; }
-        .phone-bar.long { width: 100%; }
-
-        /* Features Section */
-        .features {
-            padding: 6rem 0;
-            background: var(--dark-surface);
-        }
-
-        .features-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .features-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .features-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-        }
-
-        .features-subtitle {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: var(--dark-bg);
-            border: 1px solid var(--dark-border);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: var(--gradient-primary);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary-green);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-primary);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .feature-description {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Roadmap Section */
-        .roadmap-timeline {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .roadmap-timeline::before {
-            content: '';
-            position: absolute;
-            left: 30px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--gradient-primary);
-            opacity: 0.3;
-        }
-
-        .roadmap-phase {
-            position: relative;
-            margin-bottom: 3rem;
-            padding-left: 80px;
-        }
-
-        .roadmap-phase:last-child {
-            margin-bottom: 0;
-        }
-
-        .phase-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .phase-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            position: absolute;
-            left: 0;
-            top: 0;
-            z-index: 2;
-        }
-
-        .phase-icon.completed {
-            background: var(--gradient-primary);
-            color: white;
-        }
-
-        .phase-icon.current {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .phase-icon.upcoming {
-            background: var(--dark-surface);
-            border: 2px solid var(--primary-green);
-            color: var(--primary-light);
-        }
-
-        .phase-info {
-            flex: 1;
-        }
-
-        .phase-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-
-        .phase-status {
-            font-size: 0.875rem;
-            font-weight: 600;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .phase-status.completed {
-            background: rgba(22, 163, 74, 0.1);
-            color: var(--primary-light);
-            border: 1px solid rgba(22, 163, 74, 0.2);
-        }
-
-        .phase-status.current {
-            background: rgba(245, 158, 11, 0.1);
-            color: #f59e0b;
-            border: 1px solid rgba(245, 158, 11, 0.2);
-        }
-
-        .phase-status.upcoming {
-            background: rgba(113, 113, 122, 0.1);
-            color: var(--text-muted);
-            border: 1px solid rgba(113, 113, 122, 0.2);
-        }
-
-        .phase-content {
-            background: var(--dark-bg);
-            border: 1px solid var(--dark-border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-left: -20px;
-        }
-
-        .phase-items {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .phase-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem;
-            border-radius: 12px;
-            transition: all 0.2s ease;
-        }
-
-        .phase-item:hover {
-            background: rgba(22, 163, 74, 0.05);
-        }
-
-        .phase-item.completed {
-            background: rgba(22, 163, 74, 0.05);
-            border: 1px solid rgba(22, 163, 74, 0.1);
-        }
-
-        .phase-item.in-progress {
-            background: rgba(245, 158, 11, 0.05);
-            border: 1px solid rgba(245, 158, 11, 0.1);
-        }
-
-        .phase-item.pending {
-            background: rgba(113, 113, 122, 0.05);
-            border: 1px solid rgba(113, 113, 122, 0.1);
-        }
-
-        .item-icon {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .phase-item.completed .item-icon {
-            background: var(--primary-green);
-            color: white;
-        }
-
-        .phase-item.in-progress .item-icon {
-            background: #f59e0b;
-            color: white;
-        }
-
-        .phase-item.pending .item-icon {
-            background: var(--text-muted);
-            color: var(--dark-bg);
-        }
-
-        .item-text {
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        /* News Section */
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .news-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .news-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .news-date {
-            font-size: 0.875rem;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-
-        .news-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 1rem;
-            line-height: 1.3;
-        }
-
-        .news-content {
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .news-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .news-tag {
-            background: rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.8);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        /* Story Section */
-        .story {
-            padding: 6rem 0;
-            background: var(--gradient-primary);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .story::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            opacity: 0.1;
-            pointer-events: none;
-        }
-
-        .story-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .story-content {
-            color: white;
-        }
-
-        .story-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .story-text {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            opacity: 0.95;
-        }
-
-        .story-cta {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        .story-cta:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .story-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-
-        .story-stat {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .story-stat-number {
-            font-size: 2rem;
-            font-weight: 900;
-            color: white;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .story-stat-label {
-            font-size: 0.875rem;
-            color: rgba(255, 255, 255, 0.8);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 600;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            padding: 6rem 0;
-            background: var(--dark-bg);
-            text-align: center;
-        }
-
-        .cta-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .cta-title {
-            font-size: 3rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-green) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .cta-subtitle {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 3rem;
-        }
-
-        .cta-stats {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            opacity: 0.8;
-        }
-
-        .cta-stat {
-            text-align: center;
-        }
-
-        .cta-stat-number {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary-light);
-        }
-
-        .cta-stat-label {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-        }
-
-        .cta-divider {
-            width: 1px;
-            height: 40px;
-            background: var(--dark-border);
-        }
-
-        /* Footer */
-        .footer {
-            padding: 2rem 0;
-            background: var(--dark-surface);
-            border-top: 1px solid var(--dark-border);
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.875rem;
-        }
-
-        /* Animations */
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        @keyframes shimmer {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        .pulse {
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-container {
-                padding: 1rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .hero-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                text-align: center;
-                padding: 4rem 1rem;
-            }
-
-            .hero-visual {
-                order: -1;
-            }
-
-            .phone-mockup {
-                width: 250px;
-                height: 500px;
-            }
-
-            .story-container {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-                text-align: center;
-            }
-
-            .story-stats {
-                grid-template-columns: 1fr;
-            }
-
-            .features-container,
-            .cta-container {
-                padding: 0 1rem;
-            }
-
-            .roadmap-timeline::before {
-                left: 20px;
-            }
-
-            .roadmap-phase {
-                padding-left: 60px;
-            }
-
-            .phase-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 1.25rem;
-            }
-
-            .phase-content {
-                margin-left: -10px;
-                padding: 1rem;
-            }
-
-            .news-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .news-card {
-                padding: 1.5rem;
-            }
-
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .story-title,
-            .features-title {
-                font-size: 2rem;
-            }
-
-            .cta-title {
-                font-size: 2.5rem;
-            }
-
-            .hero-cta,
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 300px;
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-stats,
-            .cta-stats {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .cta-divider {
-                width: 40px;
-                height: 1px;
-            }
-
-            /* Feedback form mobile adjustments */
-            .feedback-form form > div:first-child {
-                grid-template-columns: 1fr !important;
-            }
-            
-            #bugFields > div:first-child,
-            #bugFields > div:last-child {
-                grid-template-columns: 1fr !important;
-            }
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Loading state */
-        .loading {
-            opacity: 0;
-            animation: fadeIn 0.5s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="logo.svg" type="image/svg+xml">
 </head>
-<body class="loading">
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-container">
-            <a href="#" class="nav-brand">
-                <img src="logo.svg" alt="PedalCrew" />
+
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <img src="logo.svg" alt="PedalCrew Logo">
                 PedalCrew
             </a>
-            <div class="nav-links">
-                <a href="#features" class="nav-link">Features</a>
-                <a href="#roadmap" class="nav-link">Roadmap</a>
-                <a href="#news" class="nav-link">News</a>
-                <a href="#story" class="nav-link">My Story</a>
-                <a href="#feedback" class="nav-link">Feedback</a>
-                <a href="https://discord.gg/HwDtdh6n" class="nav-cta" target="_blank">
-                    Join Discord
-                </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#faq">FAQ</a>
+                <a href="#download" class="nav-cta">Get the App</a>
             </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- ===== HERO ===== -->
     <section class="hero">
-        <div class="hero-container">
+        <!-- Organic blobs -->
+        <div class="hero-blob hero-blob--1"></div>
+        <div class="hero-blob hero-blob--2"></div>
+        <div class="hero-blob hero-blob--3"></div>
+
+        <div class="container hero-grid">
             <div class="hero-content">
-                <div class="hero-badge">
-                    🚀 Join 500+ Beta Testers
-                </div>
-                <h1 class="hero-title">
-                    We connect cyclists with their perfect crew
-                </h1>
-                <p class="hero-subtitle">
-                    Make cycling more social, transparent, and community-driven. No more chat chaos or endless spreadsheets—just pure cycling joy with the people who share your passion.
+                <span class="section-label">🚴 Coming Soon</span>
+                <h1>Your Next Ride<br>is <span class="text-gradient">One Tap Away.</span></h1>
+                <p>
+                    PedalCrew helps you find cycling buddies, organize group rides, and hit the road together.
+                    No clutter, just riding.
                 </p>
-                <div class="hero-cta">
-                    <a href="https://discord.gg/HwDtdh6n" class="btn btn-primary pulse" target="_blank">
-                        🚴‍♂️ Join Community
+                <div class="hero-buttons">
+                    <a href="#download" class="btn btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        Get the App
                     </a>
-                    <a href="#story" class="btn btn-secondary">
-                        My Journey
-                    </a>
-                </div>
-                <div class="hero-stats">
-                    <div class="hero-stat">
-                        <span class="hero-stat-number">500+</span>
-                        <span class="hero-stat-label">Beta Testers</span>
-                    </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat-number">365+</span>
-                        <span class="hero-stat-label">Days Building</span>
-                    </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat-number">MVP</span>
-                        <span class="hero-stat-label">Ready to Test</span>
-                    </div>
+                    <a href="#features" class="btn btn-secondary">See Features</a>
                 </div>
             </div>
             <div class="hero-visual">
                 <div class="phone-mockup">
-                    <div class="phone-screen">
-                        <div class="phone-header">
-                            PedalCrew
-                        </div>
-                        <div class="phone-content">
-                            <div class="phone-card">
-                                <div class="phone-bar medium"></div>
-                                <div class="phone-bar short"></div>
-                                <div class="phone-bar long"></div>
-                            </div>
-                            <div class="phone-card">
-                                <div class="phone-bar long"></div>
-                                <div class="phone-bar medium"></div>
-                                <div class="phone-bar short"></div>
-                            </div>
-                            <div class="phone-card">
-                                <div class="phone-bar short"></div>
-                                <div class="phone-bar long"></div>
-                                <div class="phone-bar medium"></div>
-                            </div>
-                        </div>
+                    <img src="img/Home.jpg" alt="PedalCrew Home Screen">
+                </div>
+                <!-- Rotating floating badges -->
+                <div class="badge-carousel">
+                    <div class="phone-badge" data-slot="top-right">
+                        <span class="badge-icon badge-icon--green">🚴</span>
+                        Group ride nearby!
+                    </div>
+                    <div class="phone-badge" data-slot="left">
+                        <span class="badge-icon badge-icon--amber">⚡</span>
+                        2 riders joined
+                    </div>
+                    <div class="phone-badge" data-slot="bottom-right">
+                        <span class="badge-icon badge-icon--green">📍</span>
+                        Beacon active
+                    </div>
+                    <div class="phone-badge" data-slot="top-left">
+                        <span class="badge-icon badge-icon--amber">🏆</span>
+                        +15 points earned
+                    </div>
+                    <div class="phone-badge" data-slot="bottom-left">
+                        <span class="badge-icon badge-icon--green">👥</span>
+                        5 riders going
+                    </div>
+                    <div class="phone-badge" data-slot="right">
+                        <span class="badge-icon badge-icon--amber">🔔</span>
+                        New ride posted
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
+    <!-- ===== FEATURES ===== -->
     <section id="features" class="features">
-        <div class="features-container">
-            <div class="features-header fade-in">
-                <h2 class="features-title">Where can you start?</h2>
-                <p class="features-subtitle">
-                    Discover how PedalCrew transforms the way cyclists connect and ride together.
-                </p>
+        <div class="features-blob"></div>
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Features</span>
+                <h2>Built for the Ride</h2>
+                <p>Everything you need to organize group rides, stay connected, and build your cycling community.</p>
             </div>
-            <div class="features-grid">
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">🔍</div>
-                    <h3 class="feature-title">Discover Rides</h3>
-                    <p class="feature-description">
-                        Browse upcoming rides with smart filters. Find your perfect pace, distance, and cycling crew in seconds.
-                    </p>
+
+            <!-- Feature 1: Group Rides -->
+            <div class="feature-row reveal">
+                <div class="feature-text">
+                    <span class="feature-tag">👥 Group Rides</span>
+                    <h3>Organize Rides in Seconds</h3>
+                    <p>Create group rides with a title, time, meeting point, and pace. Your crew gets notified
+                        instantly.
+                        Manage participants, handle waitlists, and keep everyone in sync.</p>
                 </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">⚡</div>
-                    <h3 class="feature-title">One-Tap Join</h3>
-                    <p class="feature-description">
-                        Hop in or out instantly. No endless group chat scrolling, no complex sign-ups. Just pure simplicity.
-                    </p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">✨</div>
-                    <h3 class="feature-title">Create Easily</h3>
-                    <p class="feature-description">
-                        Set route, date, capacity and vibe in under 30 seconds. Share with your crew and watch them join.
-                    </p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">🏆</div>
-                    <h3 class="feature-title">Level Up</h3>
-                    <p class="feature-description">
-                        Bronze → Silver → Gold → Carbon. Earn points for creating, joining, and completing rides. Make it count!
-                    </p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">🚴‍♀️</div>
-                    <h3 class="feature-title">Community-Driven</h3>
-                    <p class="feature-description">
-                        Join weekend warriors, cycling clubs, new riders, and commuters. Everyone has a place in our community.
-                    </p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">📱</div>
-                    <h3 class="feature-title">Mobile First</h3>
-                    <p class="feature-description">
-                        Designed for cyclists on the go. Quick actions, clear interface, and everything you need in your pocket.
-                    </p>
+                <div class="feature-phone">
+                    <div class="phone-mockup">
+                        <img src="img/GroupRideDetails2.jpg" alt="Group Ride Details">
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Roadmap Section -->
-    <section id="roadmap" class="features">
-        <div class="features-container">
-            <div class="features-header fade-in">
-                <h2 class="features-title">Development Roadmap</h2>
-                <p class="features-subtitle">
-                    See what's coming next and track our progress as we build the future of cycling communities.
-                </p>
+            <!-- Feature 2: Beacons -->
+            <div class="feature-row feature-row--reverse reveal">
+                <div class="feature-text">
+                    <span class="feature-tag">📍 Live Beacons</span>
+                    <h3>Find Riders Near You</h3>
+                    <p>Light a beacon and nearby cyclists can see you on the map. Perfect for spontaneous rides —
+                        no planning needed, just tap and ride.</p>
+                </div>
+                <div class="feature-phone">
+                    <div class="phone-mockup">
+                        <img src="img/BeaconMap.jpg" alt="Beacon Map View">
+                    </div>
+                </div>
             </div>
-            <div class="roadmap-timeline">
-                <div class="roadmap-phase fade-in">
-                    <div class="phase-header">
-                        <div class="phase-icon completed">✅</div>
-                        <div class="phase-info">
-                            <h3 class="phase-title">Phase 1: MVP Foundation</h3>
-                            <span class="phase-status completed">Completed</span>
-                        </div>
-                    </div>
-                    <div class="phase-content">
-                        <div class="phase-items">
-                            <div class="phase-item completed">
-                                <span class="item-icon">✓</span>
-                                <span class="item-text">Core ride discovery and creation</span>
-                            </div>
-                            <div class="phase-item completed">
-                                <span class="item-icon">✓</span>
-                                <span class="item-text">One-tap join functionality</span>
-                            </div>
-                            <div class="phase-item completed">
-                                <span class="item-icon">✓</span>
-                                <span class="item-text">Basic user profiles and authentication</span>
-                            </div>
-                            <div class="phase-item completed">
-                                <span class="item-icon">✓</span>
-                                <span class="item-text">Mobile-first responsive design</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="roadmap-phase fade-in">
-                    <div class="phase-header">
-                        <div class="phase-icon current">🚧</div>
-                        <div class="phase-info">
-                            <h3 class="phase-title">Phase 2: Community & Social</h3>
-                            <span class="phase-status current">In Progress</span>
-                        </div>
-                    </div>
-                    <div class="phase-content">
-                        <div class="phase-items">
-                            <div class="phase-item completed">
-                                <span class="item-icon">✓</span>
-                                <span class="item-text">User rating and feedback system</span>
-                            </div>
-                            <div class="phase-item in-progress">
-                                <span class="item-icon">🔄</span>
-                                <span class="item-text">Advanced filtering and search</span>
-                            </div>
-                            <div class="phase-item pending">
-                                <span class="item-icon">⏳</span>
-                                <span class="item-text">Group chat and ride communication</span>
-                            </div>
-                            <div class="phase-item pending">
-                                <span class="item-icon">⏳</span>
-                                <span class="item-text">Ride history and statistics</span>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Feature 3: Profile -->
+            <div class="feature-row reveal">
+                <div class="feature-text">
+                    <span class="feature-tag">🏆 Your Profile</span>
+                    <h3>Track Your Riding Journey</h3>
+                    <p>See your created and joined rides, earn points for participation, and build your rider
+                        reputation.
+                        Your cycling stats, all in one place.</p>
                 </div>
-
-                <div class="roadmap-phase fade-in">
-                    <div class="phase-header">
-                        <div class="phase-icon upcoming">📅</div>
-                        <div class="phase-info">
-                            <h3 class="phase-title">Phase 3: Advanced Features</h3>
-                            <span class="phase-status upcoming">Q2 2025</span>
-                        </div>
-                    </div>
-                    <div class="phase-content">
-                        <div class="phase-items">
-                            <div class="phase-item pending">
-                                <span class="item-icon">⏳</span>
-                                <span class="item-text">GPS route tracking and sharing</span>
-                            </div>
-                            <div class="phase-item pending">
-                                <span class="item-icon">⏳</span>
-                                <span class="item-text">Weather integration and alerts</span>
-                            </div>
-                            <div class="phase-item pending">
-                                <span class="item-icon">⏳</span>
-                                <span class="item-text">Achievement system and gamification</span>
-                            </div>
-                            <div class="phase-item pending">
-                                <span class="item-icon">⏳</span>
-                                <span class="item-text">Club and team management</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="roadmap-phase fade-in">
-                    <div class="phase-header">
-                        <div class="phase-icon upcoming">🔮</div>
-                        <div class="phase-info">
-                            <h3 class="phase-title">Phase 4: Future Vision</h3>
-                            <span class="phase-status upcoming">Q3-Q4 2025</span>
-                        </div>
-                    </div>
-                    <div class="phase-content">
-                        <div class="phase-items">
-                            <div class="phase-item pending">
-                                <span class="item-icon">⏳</span>
-                                <span class="item-text">AI-powered ride recommendations</span>
-                            </div>
-                            <div class="phase-item pending">
-                                <span class="item-icon">⏳</span>
-                                <span class="item-text">Integration with fitness trackers</span>
-                            </div>
-                            <div class="phase-item pending">
-                                <span class="item-icon">⏳</span>
-                                <span class="item-text">Event and race organization tools</span>
-                            </div>
-                            <div class="phase-item pending">
-                                <span class="item-icon">⏳</span>
-                                <span class="item-text">Multi-platform support (iOS, Web)</span>
-                            </div>
-                        </div>
+                <div class="feature-phone">
+                    <div class="phone-mockup">
+                        <img src="img/Profile.jpg" alt="Rider Profile">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- News Section -->
-    <section id="news" class="story">
-        <div class="story-container">
-            <div class="story-content fade-in">
-                <h2 class="story-title">Latest Updates</h2>
-                <p class="story-text">
-                    Stay up to date with the latest PedalCrew developments, new features, and community highlights.
-                </p>
+    <!-- ===== HOW IT WORKS ===== -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">How It Works</span>
+                <h2>Three Steps to Your Next Ride</h2>
+                <p>Getting your crew together has never been easier.</p>
             </div>
-            <div class="news-grid fade-in">
-                <div class="news-card">
-                    <div class="news-date">January 15, 2025</div>
-                    <h3 class="news-title">🚀 Beta Testing Program Launched</h3>
-                    <p class="news-content">
-                        We've officially launched our beta testing program with 500+ cyclists already on board! 
-                        The response has been incredible, and we're gathering valuable feedback to improve the app.
-                    </p>
-                    <div class="news-tags">
-                        <span class="news-tag">Beta</span>
-                        <span class="news-tag">Community</span>
+
+            <div class="steps-grid reveal">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Create a Ride</h3>
+                    <p>Set a time, place, pace, and max riders. Or light a quick beacon for a spontaneous ride.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Friends Join In</h3>
+                    <p>Your crew gets notified. They can join with one tap and see all the details instantly.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Ride Together</h3>
+                    <p>Meet up, ride out, earn points. Check in when you're done and track your progress.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== COMING NEXT (Dark Section) ===== -->
+    <section id="coming-next" class="coming-next">
+        <div class="coming-next-glow coming-next-glow--1"></div>
+        <div class="coming-next-glow coming-next-glow--2"></div>
+        <div class="coming-next-glow coming-next-glow--3"></div>
+
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Coming Next</span>
+                <h2>What's on the Horizon</h2>
+                <p>We're building more than a ride app. Here's what's coming to PedalCrew.</p>
+            </div>
+        </div>
+
+        <!-- Scrolling marquee -->
+        <div class="marquee-wrap">
+            <div class="marquee-track">
+                <span class="marquee-item">Clubs</span>
+                <span class="marquee-item">Community Fund</span>
+                <span class="marquee-item">Better Course Display</span>
+                <span class="marquee-item">Friends</span>
+                <span class="marquee-item">Ranking System</span>
+                <span class="marquee-item">Challenges</span>
+                <span class="marquee-item">Reputation</span>
+                <span class="marquee-item">Streaks</span>
+                <span class="marquee-item">Badges</span>
+                <span class="marquee-item">Clubs</span>
+                <span class="marquee-item">Community Fund</span>
+                <span class="marquee-item">Better Course Display</span>
+                <span class="marquee-item">Friends</span>
+                <span class="marquee-item">Ranking System</span>
+                <span class="marquee-item">Challenges</span>
+                <span class="marquee-item">Reputation</span>
+                <span class="marquee-item">Streaks</span>
+                <span class="marquee-item">Badges</span>
+            </div>
+        </div>
+
+        <!-- 3D tilt cards -->
+        <div class="container">
+            <div class="tilt-grid reveal">
+                <div class="tilt-card">
+                    <div class="tilt-card-inner">
+                        <div class="tilt-shine"></div>
+                        <h3>Clubs</h3>
+                        <p>Create or join cycling clubs. Organize regular rides, share a feed, and build a local
+                            community around your riding scene.</p>
                     </div>
                 </div>
-
-                <div class="news-card">
-                    <div class="news-date">January 10, 2025</div>
-                    <h3 class="news-title">✨ New Feature: Smart Ride Filtering</h3>
-                    <p class="news-content">
-                        Added advanced filtering options to help cyclists find rides that match their skill level, 
-                        preferred distance, and riding style. No more scrolling through irrelevant rides!
-                    </p>
-                    <div class="news-tags">
-                        <span class="news-tag">Feature</span>
-                        <span class="news-tag">UX</span>
+                <div class="tilt-card">
+                    <div class="tilt-card-inner">
+                        <div class="tilt-shine"></div>
+                        <h3>Community Fund</h3>
+                        <p>Pool resources with your crew for shared gear, group events, and travel expenses.</p>
                     </div>
                 </div>
-
-                <div class="news-card">
-                    <div class="news-date">January 5, 2025</div>
-                    <h3 class="news-title">🔧 Performance Improvements</h3>
-                    <p class="news-content">
-                        Optimized app performance and reduced loading times by 40%. The app now feels much 
-                        snappier, especially when browsing through multiple rides and user profiles.
-                    </p>
-                    <div class="news-tags">
-                        <span class="news-tag">Performance</span>
-                        <span class="news-tag">Update</span>
+                <div class="tilt-card">
+                    <div class="tilt-card-inner">
+                        <div class="tilt-shine"></div>
+                        <h3>Better Course Display</h3>
+                        <p>See the full route on a map before you join. Elevation profiles, distance markers, and
+                            turn-by-turn previews.</p>
                     </div>
                 </div>
-
-                <div class="news-card">
-                    <div class="news-date">December 28, 2024</div>
-                    <h3 class="news-title">🎉 365 Days of Development</h3>
-                    <p class="news-content">
-                        Celebrating one full year of building PedalCrew! From a simple idea to a working MVP, 
-                        it's been an incredible journey. Thank you to all the early supporters and testers.
-                    </p>
-                    <div class="news-tags">
-                        <span class="news-tag">Milestone</span>
-                        <span class="news-tag">Community</span>
+                <div class="tilt-card">
+                    <div class="tilt-card-inner">
+                        <div class="tilt-shine"></div>
+                        <h3>Friends</h3>
+                        <p>Add friends, see what they're riding, and get notified when they head out.</p>
                     </div>
                 </div>
-
-                <div class="news-card">
-                    <div class="news-date">December 20, 2024</div>
-                    <h3 class="news-title">📱 UI/UX Redesign Complete</h3>
-                    <p class="news-content">
-                        Completely redesigned the user interface based on feedback from our early testers. 
-                        The new design is cleaner, more intuitive, and optimized for one-handed use while cycling.
-                    </p>
-                    <div class="news-tags">
-                        <span class="news-tag">Design</span>
-                        <span class="news-tag">UX</span>
+                <div class="tilt-card">
+                    <div class="tilt-card-inner">
+                        <div class="tilt-shine"></div>
+                        <h3>Ranking System</h3>
+                        <p>Compete with riders in your area. Climb the leaderboard based on rides and points earned.</p>
                     </div>
                 </div>
-
-                <div class="news-card">
-                    <div class="news-date">December 15, 2024</div>
-                    <h3 class="news-title">🔐 Enhanced Security & Privacy</h3>
-                    <p class="news-content">
-                        Implemented end-to-end encryption for all user communications and added comprehensive 
-                        privacy controls. Your data and conversations are now fully protected.
-                    </p>
-                    <div class="news-tags">
-                        <span class="news-tag">Security</span>
-                        <span class="news-tag">Privacy</span>
+                <div class="tilt-card">
+                    <div class="tilt-card-inner">
+                        <div class="tilt-shine"></div>
+                        <h3>Challenges</h3>
+                        <p>Weekly and monthly challenges to push yourself. Complete goals and compete with your crew.
+                        </p>
+                    </div>
+                </div>
+                <div class="tilt-card">
+                    <div class="tilt-card-inner">
+                        <div class="tilt-shine"></div>
+                        <h3>Reputation</h3>
+                        <p>Build trust in the community. Show up consistently and earn your reputation score.</p>
+                    </div>
+                </div>
+                <div class="tilt-card">
+                    <div class="tilt-card-inner">
+                        <div class="tilt-shine"></div>
+                        <h3>Streaks</h3>
+                        <p>Keep the momentum going. Ride regularly and watch your streak grow week after week.</p>
+                    </div>
+                </div>
+                <div class="tilt-card">
+                    <div class="tilt-card-inner">
+                        <div class="tilt-shine"></div>
+                        <h3>Badges</h3>
+                        <p>Collect badges for milestones, achievements, and meaningful community contributions.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Story Section -->
-    <section id="story" class="story">
-        <div class="story-container">
-            <div class="story-content fade-in">
-                <h2 class="story-title">Built by a cyclist, for cyclists</h2>
-                <p class="story-text">
-                    Hi! I'm a Computer Science student and endurance sports enthusiast. Like you, I love gym sessions, road cycling, and running. But organizing group rides? That was always a mess.
-                </p>
-                <p class="story-text">
-                    After a year of solo development, countless late nights, and way too much coffee, PedalCrew was born. This isn't just another app—it's my solution to the chaos we all know too well.
-                </p>
-                <p class="story-text">
-                    <strong>Your feedback shapes everything.</strong> This is MVP, and every feature request, bug report, and suggestion directly influences the roadmap.
-                </p>
-                <a href="mailto:developmentbigi@gmail.com" class="btn story-cta">
-                    🤝 Join the Journey
-                </a>
-            </div>
-            <div class="story-stats fade-in">
-                <div class="story-stat">
-                    <span class="story-stat-number">365+</span>
-                    <span class="story-stat-label">Days Building</span>
-                </div>
-                <div class="story-stat">
-                    <span class="story-stat-number">500+</span>
-                    <span class="story-stat-label">Beta Testers</span>
-                </div>
-                <div class="story-stat">
-                    <span class="story-stat-number">MVP</span>
-                    <span class="story-stat-label">Status</span>
-                </div>
-                <div class="story-stat">
-                    <span class="story-stat-number">∞</span>
-                    <span class="story-stat-label">Passion</span>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Discord Community Section -->
-    <section id="community" class="features">
-        <div class="features-container">
-            <div class="features-header fade-in">
-                <h2 class="features-title">Join Our Discord Community</h2>
-                <p class="features-subtitle">
-                    Connect with fellow cyclists, share your rides, and help shape PedalCrew's future in real-time.
-                </p>
+
+
+
+    <!-- ===== FAQ ===== -->
+    <section id="faq" class="faq">
+        <div class="faq-blob"></div>
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">FAQ</span>
+                <h2>Frequently Asked<br>Questions</h2>
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-top: 3rem;">
-                <div class="fade-in">
-                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">🚴‍♂️ Real-time Community</h3>
-                    <ul style="list-style: none; padding: 0; color: var(--text-secondary); line-height: 1.8;">
-                        <li>✅ <strong>Instant feedback</strong> - Get responses within minutes</li>
-                        <li>🗳️ <strong>Feature voting</strong> - Vote on what gets built next</li>
-                        <li>🏆 <strong>Hall of Fame</strong> - Earn points and recognition</li>
-                        <li>📸 <strong>Ride showcase</strong> - Share your cycling adventures</li>
-                        <li>🐛 <strong>Bug reports</strong> - Report issues and get quick fixes</li>
-                        <li>💡 <strong>Feature requests</strong> - Suggest new ideas</li>
-                    </ul>
-                    <div style="margin-top: 2rem;">
-                        <a href="https://discord.gg/HwDtdh6n" class="btn btn-primary" target="_blank" style="margin-right: 1rem;">
-                            🚴‍♂️ Join Discord
-                        </a>
-                        <a href="#feedback" class="btn btn-secondary">
-                            💬 Or Use Form Below
-                        </a>
+
+            <div class="faq-list reveal">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What is PedalCrew?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>PedalCrew is a mobile app that helps cyclists organize group rides, find nearby riders
+                            through
+                            live beacons, and build their local cycling community. Think of it as a social layer for
+                            your
+                            riding life.</p>
                     </div>
                 </div>
-                <div class="fade-in" style="display: flex; justify-content: center;">
-                    <iframe src="https://discord.com/widget?id=1422537986880311442&theme=dark" 
-                            width="350" height="500" allowtransparency="true" 
-                            frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-                            style="border-radius: 12px; box-shadow: var(--shadow-lg);"></iframe>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Is PedalCrew free?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! PedalCrew is completely free to use. Create rides, join rides, use beacons — all at no
+                            cost. We believe cycling communities shouldn't have a paywall.</p>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Feedback Section -->
-    <section id="feedback" class="features">
-        <div class="features-container">
-            <div class="features-header fade-in">
-                <h2 class="features-title">Share Your Thoughts</h2>
-                <p class="features-subtitle">
-                    Your feedback directly shapes PedalCrew's future. Every suggestion, bug report, and idea matters.
-                </p>
-            </div>
-            <div style="max-width: 600px; margin: 0 auto;">
-                <div class="feedback-form fade-in">
-                        <form id="feedbackForm" action="https://formspree.io/f/mjkakrjr" method="POST" style="display: flex; flex-direction: column; gap: 1.5rem;">
-                            <!-- Formspree Configuration -->
-                            <input type="hidden" name="_subject" value="New PedalCrew Feedback Submission">
-                            <input type="hidden" name="_next" value="https://your-domain.com/thank-you">
-                            <input type="hidden" name="_captcha" value="false">
-                            <input type="hidden" name="_template" value="table">
-                            
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                            <div>
-                                <label for="name" style="display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.5rem;">Name</label>
-                                <input type="text" id="name" name="name" required style="width: 100%; padding: 0.875rem; border: 1px solid var(--dark-border); border-radius: 12px; background: var(--dark-bg); color: var(--text-primary); font-family: inherit; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary-green)'" onblur="this.style.borderColor='var(--dark-border)'">
-                            </div>
-                            <div>
-                                <label for="email" style="display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.5rem;">Email</label>
-                                <input type="email" id="email" name="email" required style="width: 100%; padding: 0.875rem; border: 1px solid var(--dark-border); border-radius: 12px; background: var(--dark-bg); color: var(--text-primary); font-family: inherit; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary-green)'" onblur="this.style.borderColor='var(--dark-border)'">
-                            </div>
-                        </div>
-                        <div>
-                            <label for="type" style="display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.5rem;">Feedback Type</label>
-                            <select id="type" name="type" required onchange="toggleConditionalFields(this.value); showInstantResponse(this.value);" style="width: 100%; padding: 0.875rem; border: 1px solid var(--dark-border); border-radius: 12px; background: var(--dark-bg); color: var(--text-primary); font-family: inherit; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary-green)'" onblur="this.style.borderColor='var(--dark-border)'">
-                                <option value="">Select feedback type...</option>
-                                <option value="bug">🐛 Bug Report</option>
-                                <option value="feature">💡 Feature Request</option>
-                                <option value="general">💬 General Feedback</option>
-                                <option value="beta">🚀 Beta Testing Interest</option>
-                                <option value="collaboration">🤝 Collaboration</option>
-                            </select>
-                        </div>
-                        
-                        <!-- Bug Report Specific Fields -->
-                        <div id="bugFields" style="display: none; border: 1px solid var(--primary-green); border-radius: 12px; padding: 1.5rem; background: rgba(22, 163, 74, 0.05);">
-                            <h4 style="color: var(--primary-light); margin-bottom: 1rem; font-size: 1rem;">🐛 Bug Report Details</h4>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-                                <div>
-                                    <label for="appVersion" style="display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.5rem;">App Version</label>
-                                    <input type="text" id="appVersion" name="appVersion" placeholder="e.g., 1.0.0 (build 23)" style="width: 100%; padding: 0.875rem; border: 1px solid var(--dark-border); border-radius: 12px; background: var(--dark-bg); color: var(--text-primary); font-family: inherit; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary-green)'" onblur="this.style.borderColor='var(--dark-border)'">
-                                </div>
-                                <div>
-                                    <label for="phoneModel" style="display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.5rem;">Phone Model</label>
-                                    <input type="text" id="phoneModel" name="phoneModel" placeholder="e.g., Samsung Galaxy S24" style="width: 100%; padding: 0.875rem; border: 1px solid var(--dark-border); border-radius: 12px; background: var(--dark-bg); color: var(--text-primary); font-family: inherit; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary-green)'" onblur="this.style.borderColor='var(--dark-border)'">
-                                </div>
-                            </div>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                                <div>
-                                    <label for="androidVersion" style="display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.5rem;">Android Version</label>
-                                    <input type="text" id="androidVersion" name="androidVersion" placeholder="e.g., Android 14" style="width: 100%; padding: 0.875rem; border: 1px solid var(--dark-border); border-radius: 12px; background: var(--dark-bg); color: var(--text-primary); font-family: inherit; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary-green)'" onblur="this.style.borderColor='var(--dark-border)'">
-                                </div>
-                                <div>
-                                    <label for="frequency" style="display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.5rem;">How Often?</label>
-                                    <select id="frequency" name="frequency" style="width: 100%; padding: 0.875rem; border: 1px solid var(--dark-border); border-radius: 12px; background: var(--dark-bg); color: var(--text-primary); font-family: inherit; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary-green)'" onblur="this.style.borderColor='var(--dark-border)'">
-                                        <option value="">Select frequency...</option>
-                                        <option value="always">Always happens</option>
-                                        <option value="often">Happens often</option>
-                                        <option value="sometimes">Sometimes</option>
-                                        <option value="once">Happened once</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How do I find riders near me?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Use the Quick Beacon feature! Light a beacon and your location appears on the map for nearby
+                            cyclists. They can see your pace, availability, and join you for a ride in seconds.</p>
+                    </div>
+                </div>
 
-                        <!-- Feature Request Specific Fields -->
-                        <div id="featureFields" style="display: none; border: 1px solid var(--primary-green); border-radius: 12px; padding: 1.5rem; background: rgba(22, 163, 74, 0.05);">
-                            <h4 style="color: var(--primary-light); margin-bottom: 1rem; font-size: 1rem;">💡 Feature Request Details</h4>
-                            <div>
-                                <label for="priority" style="display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.5rem;">Priority Level</label>
-                                <select id="priority" name="priority" style="width: 100%; padding: 0.875rem; border: 1px solid var(--dark-border); border-radius: 12px; background: var(--dark-bg); color: var(--text-primary); font-family: inherit; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary-green)'" onblur="this.style.borderColor='var(--dark-border)'">
-                                    <option value="">How important is this?</option>
-                                    <option value="critical">🔥 Critical - App is unusable without this</option>
-                                    <option value="high">🚀 High - Would greatly improve experience</option>
-                                    <option value="medium">⭐ Medium - Nice to have</option>
-                                    <option value="low">💭 Low - Just an idea</option>
-                                </select>
-                            </div>
-                        </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Is PedalCrew available for iPhone?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>PedalCrew is currently available for Android. We're working hard on an iOS version — stay
+                            tuned for updates!</p>
+                    </div>
+                </div>
 
-                        <!-- Beta Testing Specific Fields -->
-                        <div id="betaFields" style="display: none; border: 1px solid var(--primary-green); border-radius: 12px; padding: 1.5rem; background: rgba(22, 163, 74, 0.05);">
-                            <h4 style="color: var(--primary-light); margin-bottom: 1rem; font-size: 1rem;">🚀 Beta Testing Interest</h4>
-                            <div>
-                                <label for="experience" style="display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.5rem;">Cycling Experience</label>
-                                <select id="experience" name="experience" style="width: 100%; padding: 0.875rem; border: 1px solid var(--dark-border); border-radius: 12px; background: var(--dark-bg); color: var(--text-primary); font-family: inherit; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary-green)'" onblur="this.style.borderColor='var(--dark-border)'">
-                                    <option value="">Your cycling background?</option>
-                                    <option value="beginner">🚴‍♀️ New to cycling</option>
-                                    <option value="casual">🌟 Casual rider</option>
-                                    <option value="regular">🏃‍♂️ Regular cyclist</option>
-                                    <option value="enthusiast">🔥 Cycling enthusiast</option>
-                                    <option value="competitive">🏆 Competitive cyclist</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label for="message" style="display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.5rem;">Your Message</label>
-                            <textarea id="message" name="message" required rows="5" placeholder="Tell me about your experience, ideas, or what you'd like to see in PedalCrew..." style="width: 100%; padding: 0.875rem; border: 1px solid var(--dark-border); border-radius: 12px; background: var(--dark-bg); color: var(--text-primary); font-family: inherit; resize: vertical; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary-green)'" onblur="this.style.borderColor='var(--dark-border)'"></textarea>
-                        </div>
-                        
-                        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
-                            <button type="submit" class="btn btn-primary">
-                                📩 Send Feedback
-                            </button>
-                            <p style="color: var(--text-muted); font-size: 0.875rem; margin: 0; flex-basis: 100%;">
-                                Your feedback will be sent directly to the developer
-                            </p>
-                        </div>
-                    </form>
-                    <div id="feedbackSuccess" style="display: none; text-align: center; padding: 2rem; color: var(--primary-light);">
-                        <div style="font-size: 2rem; margin-bottom: 1rem;">✅</div>
-                        <h3 style="color: var(--primary-light); margin-bottom: 0.5rem;">Thank you!</h3>
-                        <p style="color: var(--text-secondary);">Your feedback has been sent successfully. I'll get back to you soon!</p>
-                        <button id="sendAnother" class="btn btn-secondary" style="margin-top: 1rem;">
-                            🔄 Send Another Feedback
-                        </button>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Is my location data safe?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolutely. We never track your location in the background. Location is only used when you
+                            actively create a beacon or set a meeting point. Check our
+                            <a href="privacy.html" style="color: var(--c-primary); text-decoration: underline;">Privacy
+                                Policy</a> for full details.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section id="beta" class="cta-section">
-        <div class="cta-container">
-            <h2 class="cta-title fade-in">Be notified when we launch!</h2>
-            <p class="cta-subtitle fade-in">
-                Join 500+ early adopters testing PedalCrew. Your feedback shapes the future of cycling communities.
-            </p>
-            <div class="cta-buttons fade-in">
-                <a href="https://discord.gg/HwDtdh6n" class="btn btn-primary" target="_blank">
-                    🚴‍♂️ Join Discord Community
-                </a>
-                <a href="#feedback" class="btn btn-secondary">
-                    💬 Give Feedback
-                </a>
-            </div>
-            <div class="cta-stats fade-in">
-                <div class="cta-stat">
-                    <div class="cta-stat-number">500+</div>
-                    <div class="cta-stat-label">Beta testers</div>
-                </div>
-                <div class="cta-divider"></div>
-                <div class="cta-stat">
-                    <div class="cta-stat-number">MVP</div>
-                    <div class="cta-stat-label">Ready to test</div>
-                </div>
-                <div class="cta-divider"></div>
-                <div class="cta-stat">
-                    <div class="cta-stat-number">365+</div>
-                    <div class="cta-stat-label">Days building</div>
-                </div>
-            </div>
+    <!-- ===== FINAL CTA ===== -->
+    <section id="download" class="final-cta">
+        <div class="final-cta-blob final-cta-blob--1"></div>
+        <div class="final-cta-blob final-cta-blob--2"></div>
+        <div class="container reveal">
+            <span class="section-label">Ready?</span>
+            <h2>Stop Scrolling.<br><span class="text-gradient">Start Pedaling.</span></h2>
+            <p>Your next ride is waiting. Download PedalCrew and find your crew today.</p>
+            <a href="#" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2.5rem;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                Get the App
+            </a>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ===== FOOTER ===== -->
     <footer class="footer">
-        <p>&copy; 2025 PedalCrew. Built with ❤️ by a cycling enthusiast.</p>
-        <div style="margin-top: 1rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
-            <a href="terms.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s ease;" onmouseover="this.style.color='var(--primary-light)'" onmouseout="this.style.color='var(--text-muted)'">Terms of Service</a>
-            <a href="privacy.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s ease;" onmouseover="this.style.color='var(--primary-light)'" onmouseout="this.style.color='var(--text-muted)'">Privacy Policy</a>
-            <a href="mailto:developmentbigi@gmail.com" style="color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s ease;" onmouseover="this.style.color='var(--primary-light)'" onmouseout="this.style.color='var(--text-muted)'">Contact</a>
+
+        <!-- Organic background blobs -->
+        <div class="footer-blob footer-blob--1"></div>
+        <div class="footer-blob footer-blob--2"></div>
+
+
+        <div class="footer-content container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">
+                        PedalCrew
+                    </div>
+                    <p class="footer-desc">Making cycling social. Find your crew, organize rides, and hit the road
+                        together.</p>
+                </div>
+                <div>
+                    <h4>Product</h4>
+                    <div class="footer-links">
+                        <a href="#features">Features</a>
+                        <a href="#how-it-works">How It Works</a>
+                        <a href="#faq">FAQ</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Legal</h4>
+                    <div class="footer-links">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                        <a href="mailto:developmentbigi@gmail.com">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="footer-bottom">
+                <span>&copy; 2026 PedalCrew. All rights reserved.</span>
+                <span>Made with 🚴 in Slovenia</span>
+            </div>
         </div>
     </footer>
 
+    <!-- ===== SCRIPTS ===== -->
     <script>
-        // Loading animation
-        document.addEventListener('DOMContentLoaded', function() {
-            document.body.classList.remove('loading');
+        // Mobile menu toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+        // Close menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('open'));
         });
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const isActive = item.classList.contains('active');
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                // Toggle current
+                if (!isActive) item.classList.add('active');
             });
         });
 
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-        // Observe all fade-in elements
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Navigation scroll effect
-        let lastScroll = 0;
-        const nav = document.querySelector('.nav');
-
+        // Navbar scroll shadow
+        const navbar = document.querySelector('.navbar');
         window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 100) {
-                nav.style.background = 'rgba(10, 10, 10, 0.95)';
-            } else {
-                nav.style.background = 'rgba(10, 10, 10, 0.8)';
+            navbar.classList.toggle('scrolled', window.scrollY > 20);
+        }, { passive: true });
+
+        // 3D Tilt Cards
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            const inner = card.querySelector('.tilt-card-inner');
+            const shine = card.querySelector('.tilt-shine');
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -12;
+                const rotateY = ((x - centerX) / centerX) * 12;
+
+                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+                if (shine) {
+                    const pctX = ((x / rect.width) * 100).toFixed(1);
+                    const pctY = ((y / rect.height) * 100).toFixed(1);
+                    shine.style.setProperty('--mouse-x', pctX + '%');
+                    shine.style.setProperty('--mouse-y', pctY + '%');
+                }
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'rotateX(0) rotateY(0)';
+            });
+        });
+
+        // ---- Badge Carousel (Hero section) ----
+        (function initBadgeCarousel() {
+            const badges = document.querySelectorAll('.badge-carousel .phone-badge');
+            if (!badges.length) return;
+
+            const SHOW_COUNT = 2;       // How many badges visible at once
+            const CYCLE_MS = 4000;       // Total cycle interval
+            const STAGGER_MS = 700;      // Stagger between the two badges appearing
+            const EXIT_MS = 1000;        // Wait for fade-out to finish before showing new
+
+            let activeBadges = [];
+            let pool = [...Array(badges.length).keys()]; // indices
+            let carouselRunning = false;
+            let intervalId = null;
+
+            // Fisher-Yates shuffle
+            function shuffle(arr) {
+                for (let i = arr.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [arr[i], arr[j]] = [arr[j], arr[i]];
+                }
+                return arr;
             }
-            
-            lastScroll = currentScroll;
-        });
 
-        // Add some interactive elements
-        document.querySelectorAll('.feature-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-8px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
+            // Pick N random indices, avoiding the currently-active ones
+            function pickNext(count) {
+                const available = pool.filter(i => !activeBadges.includes(i));
+                shuffle(available);
+                return available.slice(0, count);
+            }
 
-        // Phone mockup content animation
-        function animatePhoneContent() {
-            const cards = document.querySelectorAll('.phone-card');
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.transform = 'translateY(-5px)';
+            function hideAll() {
+                badges.forEach(b => {
+                    b.classList.remove('badge-visible');
+                    b.classList.add('badge-exiting');
+                });
+            }
+
+            function showBadges(indices) {
+                indices.forEach((idx, i) => {
                     setTimeout(() => {
-                        card.style.transform = 'translateY(0)';
-                    }, 200);
-                }, index * 300);
-            });
-        }
-
-        // Start phone animation
-        setInterval(animatePhoneContent, 4000);
-
-        // Add cursor trail effect (subtle)
-        let mouseX = 0;
-        let mouseY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        // Performance optimized scroll handler
-        let ticking = false;
-
-        function updateScrollEffects() {
-            // Add any scroll-based effects here
-            ticking = false;
-        }
-
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                requestAnimationFrame(updateScrollEffects);
-                ticking = true;
+                        const badge = badges[idx];
+                        badge.classList.remove('badge-exiting');
+                        badge.classList.add('badge-visible');
+                    }, i * STAGGER_MS);
+                });
+                activeBadges = indices;
             }
-        });
 
-        // Toggle conditional fields based on feedback type
-        function toggleConditionalFields(type) {
-            // Hide all conditional fields first
-            document.getElementById('bugFields').style.display = 'none';
-            document.getElementById('featureFields').style.display = 'none';
-            document.getElementById('betaFields').style.display = 'none';
-            
-            // Show relevant fields based on type
-            if (type === 'bug') {
-                document.getElementById('bugFields').style.display = 'block';
-            } else if (type === 'feature') {
-                document.getElementById('featureFields').style.display = 'block';
-            } else if (type === 'beta') {
-                document.getElementById('betaFields').style.display = 'block';
+            function cycle() {
+                // First: exit current badges
+                hideAll();
+
+                // After exit transition: show new ones
+                setTimeout(() => {
+                    const next = pickNext(SHOW_COUNT);
+                    showBadges(next);
+                }, EXIT_MS);
             }
-        }
 
-        // Show instant response based on feedback type
-        function showInstantResponse(type) {
-            const responses = {
-                'bug': '🐛 Thanks! I\'ve logged this bug and will investigate ASAP. Your feedback is now published in our Discord server where others can vote on priority!',
-                'feature': '💡 Great idea! I\'ve added this to our feature voting in Discord. Come vote on it and see what others think!',
-                'beta': '🚀 Welcome to the beta! Check your email for download link and join our Discord community to connect with other testers!',
-                'general': '💬 Thank you for your feedback! I\'ll respond personally in our Discord server where the community can also see and discuss your ideas.',
-                'collaboration': '🤝 Exciting! Let\'s discuss this in our Discord - I\'ll reach out soon and the community can join the conversation!'
-            };
-            
-            // Show instant response
-            const responseDiv = document.createElement('div');
-            responseDiv.style.cssText = `
-                background: rgba(22, 163, 74, 0.1);
-                border: 1px solid rgba(22, 163, 74, 0.3);
-                border-radius: 12px;
-                padding: 1rem;
-                margin: 1rem 0;
-                color: var(--primary-light);
-                font-weight: 500;
-                text-align: center;
-            `;
-            responseDiv.innerHTML = responses[type] || responses['general'];
-            
-            // Insert after the form
-            const form = document.getElementById('feedbackForm');
-            form.parentNode.insertBefore(responseDiv, form.nextSibling);
-            
-            // Auto-hide after 5 seconds
-            setTimeout(() => {
-                responseDiv.style.opacity = '0';
-                setTimeout(() => responseDiv.remove(), 300);
-            }, 5000);
-        }
+            function startCarousel() {
+                if (carouselRunning) return;
+                carouselRunning = true;
 
-        // Formspree form handling
-        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission
-            
-            const formData = new FormData(this);
-            const type = formData.get('type');
-            
-            // Add formatted details as a hidden field for better email formatting
-            let formattedDetails = '';
-            
-            if (type === 'bug') {
-                const appVersion = formData.get('appVersion');
-                const phoneModel = formData.get('phoneModel');
-                const androidVersion = formData.get('androidVersion');
-                const frequency = formData.get('frequency');
-                
-                formattedDetails = `🐛 BUG REPORT DETAILS:\n`;
-                formattedDetails += `App Version: ${appVersion || 'Not specified'}\n`;
-                formattedDetails += `Phone Model: ${phoneModel || 'Not specified'}\n`;
-                formattedDetails += `Android Version: ${androidVersion || 'Not specified'}\n`;
-                formattedDetails += `Frequency: ${frequency || 'Not specified'}\n\n`;
-            } else if (type === 'feature') {
-                const priority = formData.get('priority');
-                formattedDetails = `💡 FEATURE REQUEST DETAILS:\n`;
-                formattedDetails += `Priority Level: ${priority || 'Not specified'}\n\n`;
-            } else if (type === 'beta') {
-                const experience = formData.get('experience');
-                formattedDetails = `🚀 BETA TESTING DETAILS:\n`;
-                formattedDetails += `Cycling Experience: ${experience || 'Not specified'}\n\n`;
+                // Immediate first show
+                const first = pickNext(SHOW_COUNT);
+                showBadges(first);
+
+                intervalId = setInterval(cycle, CYCLE_MS);
             }
-            
-            // Add the formatted details as a hidden field
-            if (formattedDetails) {
-                const hiddenField = document.createElement('input');
-                hiddenField.type = 'hidden';
-                hiddenField.name = 'formatted_details';
-                hiddenField.value = formattedDetails;
-                this.appendChild(hiddenField);
+
+            function stopCarousel() {
+                if (!carouselRunning) return;
+                carouselRunning = false;
+                clearInterval(intervalId);
+                hideAll();
+                activeBadges = [];
             }
-            
-            // Show loading state
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '⏳ Sending...';
-            submitBtn.disabled = true;
-            
-            // Submit to Formspree using fetch
-            fetch('https://formspree.io/f/mjkakrjr', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    showFeedbackSuccess(type);
-                } else {
-                    throw new Error('Form submission failed');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                // Reset button state
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                alert('Sorry, there was an error submitting your feedback. Please try again or contact us directly.');
-            });
-        });
 
-        // Show success message
-        function showFeedbackSuccess(type) {
-            const successDiv = document.getElementById('feedbackSuccess');
-            const responses = {
-                'bug': '🐛 Thanks! I\'ve logged this bug and will investigate ASAP. Your feedback is now published in our Discord server where others can vote on priority!',
-                'feature': '💡 Great idea! I\'ve added this to our feature voting in Discord. Come vote on it and see what others think!',
-                'beta': '🚀 Welcome to the beta! Check your email for download link and join our Discord community to connect with other testers!',
-                'general': '💬 Thank you for your feedback! I\'ll respond personally in our Discord server where the community can also see and discuss your ideas.',
-                'collaboration': '🤝 Exciting! Let\'s discuss this in our Discord - I\'ll reach out soon and the community can join the conversation!'
-            };
-            
-            // Update the success message based on feedback type
-            const message = responses[type] || responses['general'];
-            successDiv.querySelector('p').textContent = message;
-            
-            document.getElementById('feedbackForm').style.display = 'none';
-            successDiv.style.display = 'block';
-        }
-
-        // Send another feedback functionality
-        document.getElementById('sendAnother').addEventListener('click', function() {
-            document.getElementById('feedbackForm').style.display = 'flex';
-            document.getElementById('feedbackSuccess').style.display = 'none';
-            document.getElementById('feedbackForm').reset();
-            toggleConditionalFields(''); // Hide conditional fields
-            
-            // Reset submit button
-            const submitBtn = document.querySelector('#feedbackForm button[type="submit"]');
-            submitBtn.innerHTML = '📩 Send Feedback';
-            submitBtn.disabled = false;
-        });
+            // Only run carousel when hero is visible
+            const heroSection = document.querySelector('.hero');
+            if (heroSection) {
+                const heroObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            startCarousel();
+                        } else {
+                            stopCarousel();
+                        }
+                    });
+                }, { threshold: 0.15 });
+                heroObserver.observe(heroSection);
+            }
+        })();
     </script>
+
 </body>
+
 </html>
