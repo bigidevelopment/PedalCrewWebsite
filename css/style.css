@@ -616,8 +616,155 @@ p {
 }
 
 /* =============================================
-   HOW IT WORKS
+   FEEDBACK SECTION — BANNER CARD
    ============================================= */
+.feedback-section {
+    padding: 5rem 0;
+    background: var(--c-bg);
+    position: relative;
+}
+
+/* The banner card */
+.fb-banner {
+    background: linear-gradient(135deg, #0d2a12 0%, #143d1a 40%, #0a2510 100%);
+    border-radius: 24px;
+    padding: 3.5rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 40px rgba(27, 94, 32, 0.08);
+}
+
+/* Subtle inner glow */
+.fb-banner::before {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    top: -100px;
+    right: -80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(76, 175, 80, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.fb-banner::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    bottom: -80px;
+    left: -50px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(129, 199, 132, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* Text content side */
+.fb-banner-content {
+    position: relative;
+    z-index: 1;
+}
+
+.fb-banner-content .section-label {
+    color: var(--c-primary-light);
+    background: rgba(76, 175, 80, 0.15);
+    border-color: rgba(76, 175, 80, 0.3);
+}
+
+.fb-banner-content h2 {
+    color: white;
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    margin-bottom: 1rem;
+    line-height: 1.15;
+}
+
+.fb-banner-content p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1rem;
+    line-height: 1.75;
+    max-width: 420px;
+    margin-bottom: 1.5rem;
+}
+
+/* Trust indicators row */
+.fb-trust-row {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.75rem;
+}
+
+.fb-trust-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.9rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-pill);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.fb-trust-item:hover {
+    background: rgba(76, 175, 80, 0.12);
+    border-color: rgba(76, 175, 80, 0.25);
+    color: white;
+}
+
+.fb-trust-icon {
+    font-size: 0.95rem;
+}
+
+/* CTA pill */
+.fb-cta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    background: linear-gradient(135deg, var(--c-primary) 0%, var(--c-primary-mid) 100%);
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 4px 16px rgba(27, 94, 32, 0.3);
+    transition: all 0.3s ease;
+}
+
+.fb-cta-pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(27, 94, 32, 0.4);
+}
+
+/* Phone side — tilted */
+.fb-banner-phone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.fb-banner-phone .phone-mockup {
+    width: 240px;
+    transform: rotate(4deg);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4), 0 0 40px rgba(76, 175, 80, 0.08);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    animation: none;
+}
+
+.fb-banner-phone .phone-mockup:hover {
+    transform: rotate(0deg) translateY(-8px);
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5), 0 0 60px rgba(76, 175, 80, 0.12);
+}
+
 .how-it-works {
     padding: 6rem 0;
     background: var(--c-bg);
@@ -742,6 +889,7 @@ p {
 
 .coming-next .section-label {
     color: var(--c-primary-light);
+    background: rgba(76, 175, 80, 0.15);
     border-color: rgba(76, 175, 80, 0.3);
 }
 
@@ -750,7 +898,7 @@ p {
 }
 
 .coming-next .section-header p {
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(255, 255, 255, 0.7);
 }
 
 /* ---- MARQUEE TICKER ---- */
@@ -907,14 +1055,14 @@ p {
 
 .tilt-card-inner p {
     font-size: 0.88rem;
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.6);
     line-height: 1.7;
     margin: 0;
     transition: color 0.3s ease;
 }
 
 .tilt-card:hover .tilt-card-inner p {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.85);
 }
 
 /* =============================================
@@ -1088,13 +1236,7 @@ p {
     overflow: hidden;
 }
 
-/* SVG wave separator */
-.footer-wave {
-    display: block;
-    width: 100%;
-    height: auto;
-    margin-bottom: -1px;
-}
+
 
 /* Organic blobs */
 .footer-blob {
@@ -1123,63 +1265,7 @@ p {
     animation: blobFloat 14s ease-in-out infinite reverse;
 }
 
-/* --- Footer CTA Banner --- */
-.footer-cta-banner {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 5rem 2rem 4rem;
-    border-bottom: 1px solid rgba(76, 175, 80, 0.12);
-}
 
-.footer-cta-banner h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1.15;
-    margin-bottom: 1rem;
-    color: white;
-}
-
-.footer-cta-banner h2 span {
-    background: linear-gradient(135deg, var(--c-primary-light), var(--c-accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.footer-cta-banner p {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 1.1rem;
-    max-width: 480px;
-    margin: 0 auto 2rem;
-    line-height: 1.7;
-}
-
-.footer-cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 1rem 2.5rem;
-    border-radius: var(--radius-pill);
-    background: linear-gradient(135deg, var(--c-primary) 0%, var(--c-primary-light) 100%);
-    color: white;
-    font-weight: 700;
-    font-size: 1.05rem;
-    box-shadow: 0 4px 24px rgba(76, 175, 80, 0.35), 0 0 60px rgba(76, 175, 80, 0.1);
-    transition: all 0.35s ease;
-}
-
-.footer-cta-btn:hover {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 8px 40px rgba(76, 175, 80, 0.45), 0 0 80px rgba(76, 175, 80, 0.15);
-    color: white;
-}
-
-.footer-cta-btn svg {
-    width: 20px;
-    height: 20px;
-}
 
 /* --- Footer Content --- */
 .footer-content {
@@ -1204,14 +1290,10 @@ p {
     margin-bottom: 1.25rem;
 }
 
-.footer-brand img {
-    width: 38px;
-    height: 38px;
-    filter: brightness(0) invert(1);
-}
+
 
 .footer-desc {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.7);
     font-size: 0.95rem;
     max-width: 320px;
     line-height: 1.75;
@@ -1320,7 +1402,36 @@ p {
     }
 
     .badge-carousel {
-        display: none;
+        transform: scale(0.7);
+    }
+
+    .phone-badge {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .phone-badge[data-slot="top-right"] {
+        right: -30px;
+    }
+
+    .phone-badge[data-slot="top-left"] {
+        left: -30px;
+    }
+
+    .phone-badge[data-slot="right"] {
+        right: -35px;
+    }
+
+    .phone-badge[data-slot="left"] {
+        left: -35px;
+    }
+
+    .phone-badge[data-slot="bottom-right"] {
+        right: -30px;
+    }
+
+    .phone-badge[data-slot="bottom-left"] {
+        left: -30px;
     }
 
     .feature-row {
@@ -1329,12 +1440,33 @@ p {
         text-align: center;
     }
 
-    .feature-row--reverse .feature-text {
+    .feature-row .feature-text {
+        order: -1;
+    }
+
+    .feature-row .feature-phone {
         order: 1;
     }
 
-    .feature-row--reverse .feature-phone {
-        order: -1;
+    /* Feedback banner mobile */
+    .fb-banner {
+        grid-template-columns: 1fr;
+        padding: 2.5rem 1.5rem;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .fb-banner-content p {
+        max-width: 100%;
+    }
+
+    .fb-trust-row {
+        justify-content: center;
+    }
+
+    .fb-banner-phone .phone-mockup {
+        width: 200px;
+        transform: rotate(0deg);
     }
 
     .feature-phone .phone-mockup {
@@ -1351,9 +1483,15 @@ p {
         display: none;
     }
 
-    /* Tilt grid: 2 cols on tablet */
+    /* Tilt grid: single column on tablet/mobile */
     .tilt-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
+    }
+
+    /* Stack trust badges vertically */
+    .fb-trust-row {
+        flex-direction: column;
+        align-items: center;
     }
 
     .footer-grid {
@@ -1443,8 +1581,24 @@ p {
         align-items: center;
     }
 
-    /* Tilt grid: single column on mobile */
-    .tilt-grid {
-        grid-template-columns: 1fr;
+
+}
+
+/* =============================================
+   REDUCED MOTION
+   ============================================= */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
     }
 }

@@ -105,6 +105,43 @@
         </div>
     </section>
 
+    <!-- ===== FEEDBACK ===== -->
+    <section class="feedback-section">
+        <div class="container">
+            <div class="fb-banner reveal">
+                <div class="fb-banner-content">
+                    <span class="section-label">💬 Built Together</span>
+                    <h2>Your Voice <br>Builds the App</h2>
+                    <p>We built a feedback system right into PedalCrew. Report bugs, suggest features, or just
+                        tell us what you think — every message is read by real people on the team.</p>
+
+                    <div class="fb-trust-row">
+                        <div class="fb-trust-item">
+                            <span class="fb-trust-icon">🐛</span>
+                            <span>Bug Reports</span>
+                        </div>
+                        <div class="fb-trust-item">
+                            <span class="fb-trust-icon">💡</span>
+                            <span>Feature Ideas</span>
+                        </div>
+                        <div class="fb-trust-item">
+                            <span class="fb-trust-icon">👤</span>
+                            <span>Direct to Devs</span>
+                        </div>
+                    </div>
+
+                    <span class="fb-cta-pill">📱 Settings → Send Feedback</span>
+                </div>
+
+                <div class="fb-banner-phone">
+                    <div class="phone-mockup">
+                        <img src="img/FeedbackSystem.jpg" alt="PedalCrew Feedback System">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ===== FEATURES ===== -->
     <section id="features" class="features">
         <div class="features-blob"></div>
@@ -474,9 +511,10 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
@@ -486,39 +524,50 @@
             navbar.classList.toggle('scrolled', window.scrollY > 20);
         }, { passive: true });
 
-        // 3D Tilt Cards
-        document.querySelectorAll('.tilt-card').forEach(card => {
-            const inner = card.querySelector('.tilt-card-inner');
-            const shine = card.querySelector('.tilt-shine');
+        // 3D Tilt Cards (skip on touch devices)
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        if (!isTouchDevice) {
+            document.querySelectorAll('.tilt-card').forEach(card => {
+                const shine = card.querySelector('.tilt-shine');
 
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = ((y - centerY) / centerY) * -12;
-                const rotateY = ((x - centerX) / centerX) * 12;
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -12;
+                    const rotateY = ((x - centerX) / centerX) * 12;
 
-                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 
-                if (shine) {
-                    const pctX = ((x / rect.width) * 100).toFixed(1);
-                    const pctY = ((y / rect.height) * 100).toFixed(1);
-                    shine.style.setProperty('--mouse-x', pctX + '%');
-                    shine.style.setProperty('--mouse-y', pctY + '%');
-                }
+                    if (shine) {
+                        const pctX = ((x / rect.width) * 100).toFixed(1);
+                        const pctY = ((y / rect.height) * 100).toFixed(1);
+                        shine.style.setProperty('--mouse-x', pctX + '%');
+                        shine.style.setProperty('--mouse-y', pctY + '%');
+                    }
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'rotateX(0) rotateY(0)';
+                });
             });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'rotateX(0) rotateY(0)';
-            });
-        });
+        }
 
         // ---- Badge Carousel (Hero section) ----
         (function initBadgeCarousel() {
             const badges = document.querySelectorAll('.badge-carousel .phone-badge');
             if (!badges.length) return;
+
+            // Skip animation for users who prefer reduced motion
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReducedMotion) {
+                // Show first two badges statically
+                badges[0]?.classList.add('badge-visible');
+                badges[1]?.classList.add('badge-visible');
+                return;
+            }
 
             const SHOW_COUNT = 2;       // How many badges visible at once
             const CYCLE_MS = 4000;       // Total cycle interval
