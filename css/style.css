@@ -839,6 +839,142 @@ p {
 }
 
 /* =============================================
+   CLOSED TESTING SECTION
+   ============================================= */
+.closed-testing {
+    padding: 6rem 0;
+    background: var(--c-surface);
+    position: relative;
+}
+
+.closed-testing .section-header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 3rem;
+}
+
+.closed-testing .section-header h2 {
+    margin-bottom: 1rem;
+}
+
+.ct-join {
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+
+.ct-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+}
+
+.ct-join-note {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: var(--c-text-muted);
+}
+
+.ct-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    margin-bottom: 3.5rem;
+}
+
+.ct-block h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--c-text);
+}
+
+.ct-list {
+    list-style: none;
+}
+
+.ct-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--c-text-muted);
+    font-size: 1rem;
+}
+
+.ct-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--c-primary);
+    font-weight: 700;
+}
+
+.ct-steps {
+    margin-bottom: 3.5rem;
+}
+
+.ct-steps h3 {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: var(--c-text);
+}
+
+.ct-steps-grid {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.ct-steps-grid .step-card::after {
+    display: none;
+}
+
+.ct-incentives {
+    background: var(--c-primary-tint);
+    border-radius: var(--radius);
+    padding: 2rem 2.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.ct-incentives h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1.25rem;
+    color: var(--c-text);
+}
+
+.ct-incentives-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.ct-incentive {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: var(--c-text-muted);
+    font-size: 1rem;
+}
+
+.ct-incentive-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.ct-notes {
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.ct-notes p {
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+}
+
+.ct-notes p:last-child {
+    margin-bottom: 0;
+}
+
+/* =============================================
    COMING NEXT — DARK + MARQUEE + 3D TILT CARDS
    ============================================= */
 .coming-next {
@@ -1483,6 +1619,20 @@ p {
         display: none;
     }
 
+    /* Closed testing: stack content and steps */
+    .ct-content {
+        grid-template-columns: 1fr;
+    }
+
+    .ct-steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: none;
+    }
+
+    .ct-incentives-row {
+        flex-direction: column;
+    }
+
     /* Tilt grid: single column on tablet/mobile */
     .tilt-grid {
         grid-template-columns: 1fr;
@@ -1557,6 +1707,12 @@ p {
 @media (max-width: 480px) {
     .container {
         padding: 0 1.25rem;
+    }
+
+    .ct-steps-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
     }
 
     .hero {
